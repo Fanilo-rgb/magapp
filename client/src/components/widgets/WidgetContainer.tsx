@@ -11,7 +11,7 @@ type Props = {
 const WidgetContainer = ({children, title, icon: Icon, header: Element}: Props) => {
   return (
     <div className="widget">
-      <div className={`flex items-center justify-between ${Element && "h-8"}`}>
+      <div className={`flex items-center justify-between ${Element ? "h-8" : "mb-2"}`}>
         <div className="text-gray-500 text-xs flex gap-2 px-2">
           <Icon size={14}/>
           <p>{title}</p>
