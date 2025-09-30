@@ -8,7 +8,21 @@
 
 @layer base {
     body {
-        @apply font-sans text-gray-800;
+        @apply font-sans text-gray-800 text-xs sm:text-sm;
+    }
+
+    button {
+        @apply cursor-pointer;
+    }
+}
+
+@layer components {
+    .widget {
+        @apply w-full mx-auto sm:w-md md:w-lg lg:w-2xl transition
+    }
+
+    .verticalDivider {
+        @apply border border-gray-400 h-4
     }
 }
 
