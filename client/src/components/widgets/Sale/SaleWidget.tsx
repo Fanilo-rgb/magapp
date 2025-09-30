@@ -8,21 +8,21 @@ const sales = [
     id: 1,
     isCustomer: false,
     name: "Princy Fanilo",
-    products: { quantity: 2, bv: 36, totalPrice: 152000 },
+    products: { quantity: 2, bv: 36, totalPrice: 152200 },
     createdAt: new Date("2024-03-15T09:12:00")
   },
   {
     id: 2,
     isCustomer: false,
     name: "Tsira Andrianina",
-    products: { quantity: 1, bv: 12, totalPrice: 23000 },
+    products: { quantity: 1, bv: 12, totalPrice: 23400 },
     createdAt: new Date("2023-11-02T14:45:00")
   },
   {
     id: 3,
     isCustomer: true,
     name: "Hery Rakotomalala",
-    products: { quantity: 5, bv: 10, totalPrice: 95000 },
+    products: { quantity: 5, bv: 200, totalPrice: 1260100 },
     createdAt: new Date("2025-01-19T08:05:00")
   },
   {

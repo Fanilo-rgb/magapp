@@ -1,6 +1,7 @@
 import {Banknote, CircleDollarSign, Ellipsis, PillBottle, Printer} from "lucide-react";
 import IconButton from "../../ui/buttons/IconButton.tsx";
 import {useState} from "react";
+import {formatCurrency} from "../../../utils/formatCurrency.ts";
 
 type Props = {
   data: {
@@ -40,7 +41,8 @@ const SaleItem = ({data}: Props) => {
       <span className="verticalDivider"/>
       <div className="flex gap-2 items-center">
         <Banknote size={16}/>
-        <span className="w-20 text-center">{data.products.totalPrice.toLocaleString()}</span>
+        <span className="hidden md:block w-20 text-center">{data.products.totalPrice.toLocaleString()}</span>
+        <span className="block md:hidden w-10 text-center">{formatCurrency(data.products.totalPrice)}</span>
       </div>
       {isOver && (
         <div className="flex gap-2">
