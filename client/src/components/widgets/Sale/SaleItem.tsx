@@ -23,7 +23,7 @@ const SaleItem = ({data}: Props) => {
     <div
       onMouseEnter={() => setIsOver(true)}
       onMouseLeave={() => setIsOver(false)}
-      className="h-8 flex justify-between items-center cursor-pointer border shadow shadow-transparent hover:shadow-black/10 border-gray-300 p-1 sm:p-2 rounded-xl transition gap-2"
+      className="h-8 sm:h-10 flex justify-between items-center cursor-pointer border shadow shadow-transparent hover:shadow-black/10 border-gray-300 p-1 sm:p-2 rounded-xl transition gap-2"
     >
       <span className="truncate flex-1">{data.name}</span>
       <span className="verticalDivider"/>
