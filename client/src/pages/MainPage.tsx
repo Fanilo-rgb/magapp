@@ -2,7 +2,7 @@ const MainPage = () => {
 
   return (
     <div className="grid place-items-center">
-      Hello World
+      Hello world
     </div>
   )
 }
