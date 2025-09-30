@@ -10,7 +10,7 @@ const RootLayout = () => {
         </div>
 
         <div className="flex flex-1">
-          <div className="p-2 border-r border-gray-300">
+          <div className="hidden p-2 border-r border-gray-300">
             Dashboard
           </div>
 
