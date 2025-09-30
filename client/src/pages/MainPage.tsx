@@ -1,8 +1,10 @@
 const MainPage = () => {
 
   return (
-    <div className="grid place-items-center">
-      Hello world
+    <div className="h-full">
+      <div>
+        Hello world
+      </div>
     </div>
   )
 }

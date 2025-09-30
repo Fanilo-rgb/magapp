@@ -8,6 +8,36 @@
 
 @layer base {
     body {
-        @apply font-sans;
+        @apply font-sans text-gray-800;
     }
+}
+
+/* Scrollbar moderne et fine */
+::-webkit-scrollbar {
+    width: 6px;              /* largeur fine */
+    height: 6px;             /* si horizontal */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; /* invisible par défaut */
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2); /* léger, quasi transparent */
+    border-radius: 9999px;          /* arrondi max */
+    transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4); /* un peu plus visible au hover */
+}
+
+/* Pour Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0.2) transparent;
+}
+
+* :hover {
+    scrollbar-color: rgba(0,0,0,0.4) transparent;
 }
