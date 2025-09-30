@@ -34,7 +34,7 @@ const SaleItem = ({data}: Props) => {
       <span className="verticalDivider"/>
       <div className="flex gap-2 items-center">
         <CircleDollarSign size={16}/>
-        <span className="w-8 text-center">{data.products.quantity}</span>
+        <span className="w-8 text-center">{data.products.bv}</span>
       </div>
       <span className="verticalDivider"/>
       <div className="flex gap-2 items-center">
