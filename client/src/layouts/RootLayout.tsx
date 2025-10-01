@@ -1,5 +1,6 @@
 import {Outlet} from "react-router-dom";
 import Header from "../components/header/Header.tsx";
+import Drawer from "../components/ui/container/drawer/Drawer.tsx";
 
 const RootLayout = () => {
   return (
@@ -21,6 +22,8 @@ const RootLayout = () => {
           </div>
         </div>
       </div>
+
+      <Drawer/>
 
     </div>
   )
