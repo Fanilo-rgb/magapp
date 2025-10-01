@@ -3,6 +3,7 @@ import IconButton from "../../ui/buttons/IconButton.tsx";
 import {useState} from "react";
 import {formatCurrency} from "../../../utils/formatCurrency.ts";
 import {useMediaQuery} from "../../../hooks/useMediaQuery.ts";
+import {useNavigate} from "react-router-dom";
 
 type Props = {
   data: {
@@ -21,7 +22,13 @@ type Props = {
 const SaleItem = ({data}: Props) => {
   const [isOver, setIsOver] = useState(false)
 
+  const navigate = useNavigate()
+
   const isMid = useMediaQuery("md", "up")
+
+  const handleClick = () => {
+    navigate(`?container=drawer&content=sale&id=${data.id}`)
+  }
 
   return (
     <div
@@ -30,6 +37,7 @@ const SaleItem = ({data}: Props) => {
       className="relative"
     >
       <div
+        onClick={handleClick}
         className="h-8 sm:h-10 flex justify-between items-center cursor-pointer border shadow shadow-transparent hover:shadow-black/20 border-gray-300 p-1 sm:p-2 rounded-xl transition gap-2"
       >
         {data.isCustomer && <span className="h-2 rounded-full ml-2 sm:ml-1 w-2 bg-cyan-400"/>}
