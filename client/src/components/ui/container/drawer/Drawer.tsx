@@ -35,23 +35,25 @@ const Drawer = () => {
   if (container !== "drawer") return null
 
   return (
-    <div
-      ref={dropdownRef}
-      className="fixed flex flex-col z-20 right-0 top-0 bottom-0 w-full sm:w-md md:w-2xl bg-white/10 backdrop-blur-md shadow-2xl overflow-auto"
-    >
-      <div className="z-10 sticky top-0 flex items-center justify-between bg-gradient-to-b from-white to-transparent backdrop-blur-sm py-1 px-2 min-h-10">
-        <div className="flex gap-2">
-          <Button
-            onClick={close}
-            icon={ChevronsRight}
-          />
+    <div className="fixed z-20 w-screen h-screen bg-white/10 left-0 top-0 ">
+      <div
+        ref={dropdownRef}
+        className="absolute right-0 top-0 bottom-0 flex flex-col w-full sm:w-md md:w-2xl bg-white/10 backdrop-blur-md shadow-2xl overflow-auto"
+      >
+        <div className="z-10 sticky top-0 flex items-center justify-between bg-gradient-to-b from-white to-transparent backdrop-blur-sm py-1 px-2 min-h-10">
+          <div className="flex gap-2">
+            <Button
+              onClick={close}
+              icon={ChevronsRight}
+            />
+          </div>
+          <div>
+            item 2
+          </div>
         </div>
-        <div>
-          item 2
+        <div className="relative">
+          <Contents/>
         </div>
-      </div>
-      <div className="relative">
-        <Contents/>
       </div>
     </div>
   )
