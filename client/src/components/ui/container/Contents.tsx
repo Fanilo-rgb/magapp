@@ -18,6 +18,8 @@ const Contents = () => {
       return <ContentPadding>Creation d'un adhesion</ContentPadding>
     case "newPatient":
       return <ContentPadding>Ajout d'un nouveau patient</ContentPadding>
+    case "sale":
+      return <ContentPadding>Vue d'un achat</ContentPadding>
     default:
       return <ContentPadding>Contenu par defaut</ContentPadding>
   }
