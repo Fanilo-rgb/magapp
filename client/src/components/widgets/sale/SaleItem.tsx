@@ -46,7 +46,7 @@ const SaleItem = ({data}: Props) => {
       </div>
       {isOver && (
         <div className="flex gap-2">
-          <IconButton className="hidden sm:block" icon={Printer}/>
+          <IconButton icon={Printer}/>
           <IconButton icon={Ellipsis}/>
         </div>
       )}
