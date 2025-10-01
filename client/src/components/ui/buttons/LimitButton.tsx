@@ -32,7 +32,7 @@ const LimitButton = ({ variant = "close", ...props }: Props) => {
     >
       <button
         { ...props }
-        className={`${buttonBaseStyle} ${buttonVariants[variant]} ${isHover ? "opacity-100" : "opacity-0"} transition duration-300`}
+        className={`${buttonBaseStyle} ${buttonVariants[variant]} ${isHover ? "opacity-100" : "md:opacity-0"} transition duration-300`}
       >
         <ChevronDown/>
       </button>
