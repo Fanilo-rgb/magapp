@@ -20,6 +20,8 @@ const Contents = () => {
       return <ContentPadding>Ajout d'un nouveau patient</ContentPadding>
     case "sale":
       return <ContentPadding>Vue d'un achat</ContentPadding>
+    case "application":
+      return <ContentPadding>Vue d'une adhesion</ContentPadding>
     default:
       return <ContentPadding>Contenu par defaut</ContentPadding>
   }
