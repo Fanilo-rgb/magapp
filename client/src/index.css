@@ -18,7 +18,7 @@
 
 @layer components {
     .widget {
-        @apply w-full mx-auto sm:w-md md:w-lg lg:w-2xl transition pb-2
+        @apply relative w-full mx-auto sm:w-md md:w-lg lg:w-2xl transition pb-2
     }
 
     .verticalDivider {

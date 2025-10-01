@@ -1,7 +1,10 @@
 import WidgetContainer from "../WidgetContainer.tsx";
 import {Banknote, CircleUserRound, ClipboardPen} from "lucide-react";
 import ApplicationItem from "./ApplicationItem.tsx";
-import {useMemo} from "react";
+import {useEffect, useMemo, useState} from "react";
+import LimitButton from "../../ui/buttons/LimitButton.tsx";
+
+type variant = "close" | "open"
 
 const applications = [
   {
@@ -78,10 +81,19 @@ const applications = [
 
 const MembershipWidget = () => {
 
+  const [limit, setLimit] = useState(0)
+  const [variant, setVariant] = useState<variant>("open")
+
+  useEffect(() => {
+    setLimit(applications.length > 4 ? 4 : applications.length)
+  }, [applications])
+
   const membershipValue = useMemo(
     () => applications.length * 40_000,
     [applications]
   )
+
+  const list = applications.slice(0, limit)
 
   const header = (
     <div className="flex gap-2">
@@ -97,13 +109,23 @@ const MembershipWidget = () => {
     </div>
   )
 
+  const handleClick = () => {
+    const l = limit < applications.length ? limit + 3 : 4
+
+    setLimit(l)
+    setVariant(l === applications.length ? "close" : "open")
+  }
+
   return (
     <WidgetContainer title="Adhésion" icon={ClipboardPen} header={header}>
       <div className="flex flex-col gap-2">
-        {applications.length > 0 && applications.map(application => (
+        {applications.length > 0 && list.map(application => (
           <ApplicationItem key={application.id} data={application}/>
         ))}
       </div>
+      {applications.length > 4 && (
+        <LimitButton onClick={handleClick} variant={variant}/>
+      )}
     </WidgetContainer>
   )
 }

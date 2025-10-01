@@ -1,7 +1,10 @@
 import WidgetContainer from "../WidgetContainer.tsx";
 import {Banknote, ReceiptText} from "lucide-react";
-import {useMemo} from "react";
+import {useEffect, useMemo, useState} from "react";
 import SaleItem from "./SaleItem.tsx";
+import LimitButton from "../../ui/buttons/LimitButton.tsx";
+
+type variant = "close" | "open"
 
 const sales = [
   {
@@ -78,6 +81,13 @@ const sales = [
 
 const SaleWidget = () => {
 
+  const [limit, setLimit] = useState(0)
+  const [variant, setVariant] = useState<variant>("open")
+
+  useEffect(() => {
+    setLimit(sales.length > 4 ? 4 : sales.length)
+  }, [sales])
+
   const totalPrice = useMemo(
     () => sales.reduce((acc, r) => acc + r.products.totalPrice, 0 ),
     [sales]
@@ -90,13 +100,25 @@ const SaleWidget = () => {
     </div>
   )
 
+  const list = sales.slice(0, limit)
+
+  const handleClick = () => {
+    const l = limit < sales.length ? limit + 3 : 4
+
+    setLimit(l)
+    setVariant(l === sales.length ? "close" : "open")
+  }
+
   return (
     <WidgetContainer title="Achats" icon={ReceiptText} header={header}>
       <div className="flex flex-col gap-2">
-        {sales.length > 0 && sales.map(sale => (
+        {sales.length > 0 && list.map(sale => (
           <SaleItem key={sale.id} data={sale}/>
         ))}
       </div>
+      {sales.length > 4 && (
+        <LimitButton onClick={handleClick} variant={variant}/>
+      )}
     </WidgetContainer>
   )
 }
