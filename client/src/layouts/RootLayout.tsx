@@ -1,13 +1,13 @@
 import {Outlet} from "react-router-dom";
+import Header from "../components/header/Header.tsx";
 
 const RootLayout = () => {
   return (
     <div className="h-screen w-screen overflow-hidden">
 
       <div className="h-full flex flex-col">
-        <div className="p-1 shadow">
-          Header
-        </div>
+
+        <Header/>
 
         <div className="flex flex-1">
           <div className="hidden p-2 border-r border-gray-300">
