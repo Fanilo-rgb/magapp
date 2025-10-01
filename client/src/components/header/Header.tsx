@@ -30,7 +30,7 @@ const Header = () => {
           {showMenu && (
             <div className="absolute right-0 w-48 bg-white/10 backdrop-blur-xs shadow-lg rounded-xl p-1 flex flex-col">
               <Button icon={ReceiptText}>
-                ... une facture
+                ... un achat
               </Button>
               <Button icon={Clipboard}>
                 ... un adhesion
