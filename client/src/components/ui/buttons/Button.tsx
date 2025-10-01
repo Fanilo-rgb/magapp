@@ -7,9 +7,10 @@ type Props = React.ComponentProps<"button"> & {
   children?: React.ReactNode
   variant?: variant
   icon?: LucideIcon
+  iconPosition?: "left" | "right"
 }
 
-const Button = ({ children, icon: Icon, variant = "basic", ...props }: Props) => {
+const Button = ({ children, icon: Icon, iconPosition = "left", variant = "basic", ...props }: Props) => {
 
   const baseStyle = "flex gap-2 items-center py-1 px-2 rounded-lg transition"
 
@@ -22,8 +23,9 @@ const Button = ({ children, icon: Icon, variant = "basic", ...props }: Props) =>
 
   return (
     <button className={`${baseStyle} ${variants[variant]}`} {...props}>
-      {Icon && <Icon size={16} />}
+      {Icon && iconPosition === "left" && <Icon size={16} />}
       {children}
+      {Icon && iconPosition === "right" && <Icon className="ml-auto" size={16} />}
     </button>
   )
 
