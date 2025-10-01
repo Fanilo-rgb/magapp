@@ -1,7 +1,7 @@
 import WidgetContainer from "../WidgetContainer.tsx";
 import {Banknote, CircleUserRound, ClipboardPen} from "lucide-react";
 import ApplicationItem from "./ApplicationItem.tsx";
-import {useEffect, useMemo, useState} from "react";
+import {useEffect, useMemo, useRef, useState} from "react";
 import LimitButton from "../../ui/buttons/LimitButton.tsx";
 
 type variant = "close" | "open"
@@ -84,6 +84,14 @@ const MembershipWidget = () => {
   const [limit, setLimit] = useState(0)
   const [variant, setVariant] = useState<variant>("open")
 
+  const bottomRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    setTimeout(() => {
+      bottomRef.current?.scrollIntoView({ behavior: "smooth" })
+    }, 50)
+  }, [limit]);
+
   useEffect(() => {
     setLimit(applications.length > 4 ? 4 : applications.length)
   }, [applications])
@@ -123,6 +131,7 @@ const MembershipWidget = () => {
           <ApplicationItem key={application.id} data={application}/>
         ))}
       </div>
+      <div ref={bottomRef} />
       {applications.length > 4 && (
         <LimitButton onClick={handleClick} variant={variant}/>
       )}
