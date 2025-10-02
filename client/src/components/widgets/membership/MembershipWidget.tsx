@@ -41,41 +41,6 @@ const applications = [
     sponsor: { name: "Voahirana", numberCard: "18004015" },
     createdAt: new Date("2025-09-27T13:22:00Z"),
   },
-  {
-    id: 6,
-    applicant: { name: "Sofia R.", numberCard: "18004016" },
-    upLine: { name: "Joel Rakotomahenina", numberCard: "18004017" },
-    sponsor: { name: "Nirina", numberCard: "18004018" },
-    createdAt: new Date("2025-09-28T10:00:00Z"),
-  },
-  {
-    id: 7,
-    applicant: { name: "Mickaël F.", numberCard: "18004019" },
-    upLine: { name: "Esther Razanadrakoto", numberCard: "18004020" },
-    sponsor: { name: "Tsiory", numberCard: "18004021" },
-    createdAt: new Date("2025-09-28T16:40:00Z"),
-  },
-  {
-    id: 8,
-    applicant: { name: "Anja R.", numberCard: "18004022" },
-    upLine: { name: "Zo Rakotomalala", numberCard: "18004023" },
-    sponsor: { name: "Mialy", numberCard: "18004024" },
-    createdAt: new Date("2025-09-29T07:15:00Z"),
-  },
-  {
-    id: 9,
-    applicant: { name: "Bekoto Andriam", numberCard: "18004025" },
-    upLine: { name: "Hanta", numberCard: "18004026" },
-    sponsor: { name: "Feno", numberCard: "18004027" },
-    createdAt: new Date("2025-09-29T12:50:00Z"),
-  },
-  {
-    id: 10,
-    applicant: { name: "Rija Solofo", numberCard: "18004028" },
-    upLine: { name: "Miora Tahina", numberCard: "18004029" },
-    sponsor: { name: "Ando", numberCard: "18004030" },
-    createdAt: new Date("2025-09-30T06:05:00Z"),
-  },
 ];
 
 const MembershipWidget = () => {
