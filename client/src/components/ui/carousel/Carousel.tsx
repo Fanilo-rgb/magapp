@@ -59,7 +59,7 @@ const Carousel: React.FC<CarouselProps> = ({ children, className = "", scrollSte
       {/* container scroll */}
       <div
         ref={containerRef}
-        className="flex gap-4 overflow-hidden w-full h-full"
+        className="flex gap-4 overflow-x-hidden w-full h-full py-2"
       >
         {children}
       </div>
