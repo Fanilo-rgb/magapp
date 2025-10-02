@@ -2,7 +2,7 @@ import {Banknote, CircleDollarSign, Ellipsis, PillBottle, Printer} from "lucide-
 import IconButton from "../../ui/buttons/IconButton.tsx";
 import {useState} from "react";
 import {formatCurrency} from "../../../lib/utils/formatCurrency.ts";
-import {useMediaQuery} from "../../../hooks/useMediaQuery.ts";
+import {useMediaQuery} from "../../../lib/hooks/useMediaQuery.ts";
 import {useNavigate} from "react-router-dom";
 
 type Props = {

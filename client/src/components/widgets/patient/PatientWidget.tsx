@@ -60,7 +60,7 @@ const PatientWidget = () => {
       <div className="w-full h-36">
         <Carousel>
           {patients.length > 0 && patients.map(patient => (
-            <PatientCard data={patient}/>
+            <PatientCard key={patient.id} data={patient}/>
           ))}
         </Carousel>
       </div>

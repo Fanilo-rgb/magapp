@@ -22,6 +22,8 @@ const Contents = () => {
       return <ContentPadding>Vue d'un achat</ContentPadding>
     case "application":
       return <ContentPadding>Vue d'une adhesion</ContentPadding>
+    case "patient":
+      return <ContentPadding>Vue des info d'un patient</ContentPadding>
     default:
       return <ContentPadding>Contenu par defaut</ContentPadding>
   }

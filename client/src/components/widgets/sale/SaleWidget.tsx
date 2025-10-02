@@ -1,10 +1,9 @@
 import WidgetContainer from "../WidgetContainer.tsx";
 import {Banknote, ReceiptText} from "lucide-react";
-import {useEffect, useMemo, useRef, useState} from "react";
+import {useMemo} from "react";
 import SaleItem from "./SaleItem.tsx";
 import LimitButton from "../../ui/buttons/LimitButton.tsx";
-
-type variant = "close" | "open"
+import {useLimitList} from "../../../lib/hooks/useLimitList.ts";
 
 const sales = [
   {
@@ -80,56 +79,34 @@ const sales = [
 ];
 
 const SaleWidget = () => {
-
-  const [limit, setLimit] = useState(0)
-  const [variant, setVariant] = useState<variant>("open")
-
-  const bottomRef = useRef<HTMLDivElement | null>(null)
-
-  useEffect(() => {
-    setTimeout(() => {
-      bottomRef.current?.scrollIntoView({ behavior: "smooth" })
-    }, 50)
-
-  }, [limit]);
-
-  useEffect(() => {
-    setLimit(sales.length > 4 ? 4 : sales.length)
-  }, [sales])
+  const {sliced, variant, handleClick, bottomRef} = useLimitList(sales);
 
   const totalPrice = useMemo(
-    () => sales.reduce((acc, r) => acc + r.products.totalPrice, 0 ),
+    () => sales.reduce((acc, r) => acc + r.products.totalPrice, 0),
     [sales]
-  )
+  );
 
   const header = (
     <div className="flex items-center gap-2">
       <Banknote size={16}/>
-      <span className="font-semibold text-gray-500">{totalPrice.toLocaleString()} ar</span>
+      <span className="font-semibold text-gray-500">
+        {totalPrice.toLocaleString()} ar
+      </span>
     </div>
-  )
-
-  const list = sales.slice(0, limit)
-
-  const handleClick = () => {
-    const l = limit < sales.length ? limit + 3 : 4
-
-    setLimit(l)
-    setVariant(l === sales.length ? "close" : "open")
-  }
+  );
 
   return (
     <WidgetContainer title="Achats" icon={ReceiptText} header={header} buttonLink="?container=drawer&content=newSale">
       <div className="flex flex-col gap-2">
-        {sales.length > 0 && list.map(sale => (
+        {sliced.map(sale => (
           <SaleItem key={sale.id} data={sale}/>
         ))}
       </div>
-      <div ref={bottomRef} />
+      <div ref={bottomRef}/>
       {sales.length > 4 && (
         <LimitButton onClick={handleClick} variant={variant}/>
       )}
     </WidgetContainer>
-  )
-}
+  );
+};
 export default SaleWidget
