@@ -125,7 +125,7 @@ const MembershipWidget = () => {
   }
 
   return (
-    <WidgetContainer title="Adhésion" icon={ClipboardPen} header={header}>
+    <WidgetContainer title="Adhésion" icon={ClipboardPen} header={header} buttonLink="?container=drawer&content=newApplication">
       <div className="flex flex-col gap-2">
         {applications.length > 0 && list.map(application => (
           <ApplicationItem key={application.id} data={application}/>

@@ -1,7 +1,7 @@
 import {Banknote, CircleDollarSign, Ellipsis, PillBottle, Printer} from "lucide-react";
 import IconButton from "../../ui/buttons/IconButton.tsx";
 import {useState} from "react";
-import {formatCurrency} from "../../../utils/formatCurrency.ts";
+import {formatCurrency} from "../../../lib/utils/formatCurrency.ts";
 import {useMediaQuery} from "../../../hooks/useMediaQuery.ts";
 import {useNavigate} from "react-router-dom";
 

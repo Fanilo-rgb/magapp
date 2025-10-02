@@ -119,7 +119,7 @@ const SaleWidget = () => {
   }
 
   return (
-    <WidgetContainer title="Achats" icon={ReceiptText} header={header}>
+    <WidgetContainer title="Achats" icon={ReceiptText} header={header} buttonLink="?container=drawer&content=newSale">
       <div className="flex flex-col gap-2">
         {sales.length > 0 && list.map(sale => (
           <SaleItem key={sale.id} data={sale}/>
