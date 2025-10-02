@@ -46,12 +46,14 @@ const Carousel: React.FC<CarouselProps> = ({ children, className = "", scrollSte
     <div className={`relative w-full h-full ${className}`}>
       {/* bouton gauche */}
       {showLeft && (
-        <button
-          onClick={() => scroll("left")}
-          className="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow p-1 rounded-full z-10"
-        >
-          <ChevronLeft size={20} />
-        </button>
+        <div className="absolute left-0 bg-gradient-to-r from-white to-transparent h-full grid place-items-center px-2">
+          <button
+            onClick={() => scroll("left")}
+            className="bg-white shadow p-1 rounded-full z-10"
+          >
+            <ChevronLeft size={20} />
+          </button>
+        </div>
       )}
 
       {/* container scroll */}
@@ -64,12 +66,14 @@ const Carousel: React.FC<CarouselProps> = ({ children, className = "", scrollSte
 
       {/* bouton droit */}
       {showRight && (
-        <button
-          onClick={() => scroll("right")}
-          className="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow p-1 rounded-full z-10"
-        >
-          <ChevronRight size={20} />
-        </button>
+        <div className="absolute right-0 top-0 bg-gradient-to-l from-white via-5% to-transparent h-full grid place-items-center px-2">
+          <button
+            onClick={() => scroll("right")}
+            className="bg-white shadow p-1 rounded-full z-10"
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
       )}
     </div>
   );
