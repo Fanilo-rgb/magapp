@@ -9,11 +9,14 @@ type Props = React.ComponentProps<"button"> & {
   icon?: LucideIcon
   iconPosition?: "left" | "right"
   text?: "sm" | "base"
+  width?: "full" | "fit"
 }
 
-const Button = ({ children, icon: Icon, text = "base",iconPosition = "left", variant = "basic", ...props }: Props) => {
+const Button = ({ children, icon: Icon, text = "base", width = "fit",iconPosition = "left", variant = "basic", ...props }: Props) => {
 
-  const textSize = text === "base" ? "" : "text-xs"
+  const textSize: string = text === "base" ? "" : "text-xs"
+
+  const widthStyle: string = width === "fit" ? "" : "w-full justify-center"
 
   const baseStyle = "flex gap-2 items-center py-1 px-2 rounded-lg transition"
 
@@ -25,7 +28,7 @@ const Button = ({ children, icon: Icon, text = "base",iconPosition = "left", var
   }
 
   return (
-    <button className={`${baseStyle} ${textSize} ${variants[variant]}`} {...props}>
+    <button className={`${baseStyle} ${textSize} ${variants[variant]} ${widthStyle}`} {...props}>
       {Icon && iconPosition === "left" && <Icon size={16} />}
       {children}
       {Icon && iconPosition === "right" && <Icon className="ml-auto" size={16} />}
