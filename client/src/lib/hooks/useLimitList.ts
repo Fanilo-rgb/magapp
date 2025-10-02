@@ -24,7 +24,7 @@ export function useLimitList<T>(data: T[], step = 3, minLimit = 4) {
   const handleClick = () => {
     const newLimit = limit < data.length ? limit + step : minLimit;
     setLimit(newLimit);
-    setVariant(newLimit === data.length ? "close" : "open");
+    setVariant(newLimit >= data.length ? "close" : "open");
   };
 
   const sliced = data.slice(0, limit);
