@@ -1,6 +1,7 @@
 import SaleWidget from "../components/widgets/sale/SaleWidget.tsx";
 import MembershipWidget from "../components/widgets/membership/MembershipWidget.tsx";
 import Hello from "../components/widgets/fun/Hello.tsx";
+import PatientWidget from "../components/widgets/patient/PatientWidget.tsx";
 
 const MainPage = () => {
 
@@ -10,6 +11,7 @@ const MainPage = () => {
         <Hello/>
         <SaleWidget/>
         <MembershipWidget/>
+        <PatientWidget/>
       </div>
     </div>
   )
