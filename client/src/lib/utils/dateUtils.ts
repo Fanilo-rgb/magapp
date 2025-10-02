@@ -50,10 +50,10 @@ export function timeAgo(date: Date): string {
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);
 
-  if (days > 0) return `il y a ${days} jour(s)`;
-  if (hours > 0) return `il y a ${hours} heure(s)`;
-  if (minutes > 0) return `il y a ${minutes} minute(s)`;
-  return `il y a ${seconds} seconde(s)`;
+  if (days > 0) return `il y a ${days} j`;
+  if (hours > 0) return `il y a ${hours} h`;
+  if (minutes > 0) return `il y a ${minutes} m`;
+  return `A l'instant`;
 }
 
 /**
