@@ -51,7 +51,7 @@ const ApplicationItem = ({data}: Props) => {
         </div>
       </div>
       {isHover && (
-        <div className="absolute top-1/2 -translate-y-1/2 rigth-1 sm:right-2">
+        <div className="absolute top-1/2 -translate-y-1/2 right-1 sm:right-2">
           <IconButton icon={Ellipsis}/>
         </div>
       )}
