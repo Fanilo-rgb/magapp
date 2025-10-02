@@ -1,5 +1,6 @@
 import {useSearchParams} from "react-router-dom";
 import React from "react";
+import NewSaleForm from "../../form/NewSaleForm/NewSaleForm.tsx";
 
 type ContentPaddingProps = {
   children: React.ReactNode
@@ -13,7 +14,7 @@ const Contents = () => {
 
   switch (content) {
     case "newSale":
-      return <ContentPadding>Creation de facture</ContentPadding>
+      return <ContentPadding><NewSaleForm/></ContentPadding>
     case "newApplication":
       return <ContentPadding>Creation d'un adhesion</ContentPadding>
     case "newPatient":
