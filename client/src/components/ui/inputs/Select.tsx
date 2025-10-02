@@ -36,6 +36,8 @@ function Select<T>({ items, onSelect, renderItem, getKey, placeholder, getLabel 
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    console.log(e.key)
+
     if (e.key === "ArrowDown") {
       e.preventDefault()
       setSelectedIndex((prev) =>
@@ -54,6 +56,17 @@ function Select<T>({ items, onSelect, renderItem, getKey, placeholder, getLabel 
       e.preventDefault()
       const item = filteredItems[selectedIndex]
       onSelect(item)
+      setQuery("")
+    }
+
+    if (e.key === "Escape") {
+      e.preventDefault()
+      handleClose()
+    }
+
+    if (e.key === "Delete") {
+      e.preventDefault()
+      setQuery("")
     }
   }
 
@@ -84,7 +97,13 @@ function Select<T>({ items, onSelect, renderItem, getKey, placeholder, getLabel 
       </div>
       {open && (
         <ul className="absolute bg-white/90 shadow-md p-1 rounded-xl w-full">
-          {filteredItems.map((item, index) => (
+          {filteredItems.length === 0 && (
+            <div className="text-center p-3 text-gray-400">
+              Aucun elements trouver
+            </div>
+          )}
+
+          {filteredItems.length > 0 && filteredItems.map((item, index) => (
             <li
               className={`cursor-pointer hover:bg-black/5 overflow-hidden rounded-lg transition ${ index === selectedIndex && "bg-black/5" }`}
               onClick={() => onSelect(item)}

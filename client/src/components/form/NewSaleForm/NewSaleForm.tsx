@@ -218,8 +218,10 @@ const NewSaleForm = () => {
         </div>
       </div>
 
-      <div>
-
+      <div className="flex w-full">
+        <Button variant={"secondary"} width={"full"}>
+          Enregistrer
+        </Button>
       </div>
 
     </div>
