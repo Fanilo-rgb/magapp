@@ -74,7 +74,7 @@ function Select<T>({ items, onSelect, renderItem, getKey, placeholder, getLabel 
     <div className="relative z-10">
       <div className="flex gap-2 items-center">
         <input
-          className="bg-white/50 backdrop-blur-md px-2 py-1 border border-gray-300 rounded-lg flex-1 outline-0 ring ring-transparent focus:ring-cyan-400 focus:border-cyan-400 transition "
+          className="bg-white/90 backdrop-blur-md px-2 py-1 border border-gray-300 rounded-lg flex-1 outline-0 ring ring-transparent focus:ring-cyan-400 focus:border-cyan-400 transition "
           type="text"
           placeholder={placeholder ?? "Selectionner ..."}
           value={query}

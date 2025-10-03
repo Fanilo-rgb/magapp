@@ -1,0 +1,133 @@
+import {useSearchParams} from "react-router-dom";
+import ChoicesList from "../ui/inputs/ChoicesList.tsx";
+import {HandCoins, NotebookPen} from "lucide-react";
+import type {Label} from "../../lib/types/types.ts";
+
+const SaleView = () => {
+
+  const [searchParams] = useSearchParams()
+
+  const distContent = searchParams.get("id")
+  const customerContent = searchParams.get("customerId")
+
+  return (
+    <div className="relative flex flex-col gap-4 py-4">
+
+      {distContent && <DistributorView/>}
+
+      {customerContent && <CustomerView/>}
+
+    </div>
+  )
+}
+export default SaleView
+
+const DistributorView = () => {
+
+  const saleChoices: Label[] = [{ value: "sale", placeholder: "Achat", color: "pink" }]
+
+  const paymentChoices: Label[] = [{ value: "liquid", placeholder: "Cash", color: "green" }]
+
+  return (
+    <>
+      <div className="flex justify-between">
+        <span className="font-semibold">#00001</span>
+        <span className="text-gray-500">Il y a 2h</span>
+      </div>
+
+      <div>
+        <p className="w-full text-lg font-semibold py-1">
+          18 00 80 80
+        </p>
+        <p className="w-full text-lg font-semibold py-1">
+          Andriambololona Faniloniaina Princy
+        </p>
+      </div>
+      <div className="flex flex-col gap-2">
+        <ChoicesList
+          icon={NotebookPen}
+          label="Type de vente"
+          choices={saleChoices}
+          disable
+        />
+        <ChoicesList
+          icon={HandCoins}
+          choices={paymentChoices}
+          label="Type de payement"
+          disable
+        />
+      </div>
+
+      <hr/>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-xs text-gray-500 pl-2">Achat</p>
+        <div className="flex flex-col gap-1">
+          <div className="flex justify-between items-center">
+            <span className="truncate">Kuding</span>
+            <input
+              type="number"
+              className="w-12 py-1 text-center outline-0"
+              value={1}
+              readOnly
+            />
+          </div>
+          <div className="flex justify-between items-center">
+            <div className="flex">
+              <div className="w-12 text-center">12 $</div>
+              <div className="w-28 text-center">43 200 ar</div>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col gap-1">
+          <div className="flex justify-between items-center">
+            <span className="truncate">Kuding</span>
+            <input
+              type="number"
+              className="w-12 py-1 text-center outline-0"
+              value={1}
+              readOnly
+            />
+          </div>
+          <div className="flex justify-between items-center">
+            <div className="flex">
+              <div className="w-12 text-center">12 $</div>
+              <div className="w-28 text-center">43 200 ar</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr/>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-xs text-gray-500 pl-2">Commande</p>
+        <div className="flex flex-col gap-1">
+          <div className="flex justify-between items-center">
+            <span className="truncate">Kuding</span>
+            <input
+              type="number"
+              className="w-12 py-1 text-center outline-0"
+              value={1}
+              readOnly
+            />
+          </div>
+          <div className="flex justify-between items-center">
+            <div className="flex">
+              <div className="w-12 text-center">12 $</div>
+              <div className="w-28 text-center">43 200 ar</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  )
+}
+
+const CustomerView = () => {
+  return (
+    <div>
+      Customer
+    </div>
+  )
+}

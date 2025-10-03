@@ -2,6 +2,7 @@ import Button from "../ui/buttons/Button.tsx";
 import {Clipboard, type LucideIcon, Plus, ReceiptText, UserRoundPen} from "lucide-react";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import SearchBar from "./SearchBar.tsx";
 
 type actionButtonType = {
   content: string
@@ -25,18 +26,20 @@ const Header = () => {
     navigate(`?container=drawer&content=${content}`)
   }
 
-  return (
-    <div className="relative flex items-center py-1 px-3 gap-2 h-10 z-10">
+  const sideWidth = "h-full w-32"
 
-      <div>
+  return (
+    <div className="relative flex items-center py-1 px-3 gap-2 h-14 z-10">
+
+      <div className={sideWidth}>
         Item 1
       </div>
 
-      <div className="flex flex-1 justify-center">
-        Item 2
+      <div className="flex flex-1 justify-center items-center h-full">
+        <SearchBar/>
       </div>
 
-      <div className="flex">
+      <div className={`flex items-center justify-end ${sideWidth}`}>
         <div className="relative">
           <Button
             onClick={() => setShowMenu(!showMenu)}
@@ -49,7 +52,7 @@ const Header = () => {
           {showMenu && (
             <div className="absolute right-0 w-48 bg-white/10 backdrop-blur-xs shadow-lg rounded-xl p-1 flex flex-col">
               {buttons.map(button => (
-                <Button icon={button.icon} onClick={() => handleCreateSale(button.content)}>
+                <Button key={button.content} icon={button.icon} onClick={() => handleCreateSale(button.content)}>
                   {button.placeholder}
                 </Button>
               ))}

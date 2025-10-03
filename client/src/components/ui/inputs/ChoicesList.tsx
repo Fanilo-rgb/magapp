@@ -8,6 +8,7 @@ type ChoicesListProps = {
   choices: Label[];
   value?: string;
   onChange?: (value: string) => void;
+  disable?: boolean
 };
 
 const colorMap: Record<Color, string> = {
@@ -21,7 +22,7 @@ const colorMap: Record<Color, string> = {
   yellow: "bg-yellow-200 text-yellow-800",
 };
 
-const ChoicesList = ({ icon: Icon, label = "Description", choices, value, onChange }: ChoicesListProps) => {
+const ChoicesList = ({ icon: Icon, disable = false, label = "Description", choices, value, onChange }: ChoicesListProps) => {
   const [open, setOpen] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement | null>(null)
@@ -60,7 +61,7 @@ const ChoicesList = ({ icon: Icon, label = "Description", choices, value, onChan
       {/* Selected */}
       <div
         onClick={() => setOpen(!open)}
-        className="cursor-pointer relative bg-transparent hover:bg-black/5 p-1 rounded-sm flex-1 transition"
+        className={`relative bg-transparent p-1 rounded-sm flex-1 transition ${!disable && "hover:bg-black/5 cursor-pointer"}`}
       >
         <p
           className={`text-xs w-fit rounded px-1 py-0.5 select-none ${
@@ -71,7 +72,7 @@ const ChoicesList = ({ icon: Icon, label = "Description", choices, value, onChan
         </p>
 
         {/* Dropdown */}
-        {open && (
+        {open && !disable && (
           <div
             ref={dropdownRef}
             className="absolute bg-white shadow rounded-sm w-full left-0 top-0 z-10 p-2"
