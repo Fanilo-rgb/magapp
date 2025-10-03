@@ -171,6 +171,7 @@ const CustomerView = () => {
       </div>
 
       <div className="bg-cyan-200/50 text-cyan-800 p-2 rounded">
+        <p className="text-xs pb-2 text-cyan-600">Distributeur</p>
         <div className="text-md flex gap-2 items-center">
           <span className="w-24">18 00 80 80</span>
           <span className="verticalDivider"/>
