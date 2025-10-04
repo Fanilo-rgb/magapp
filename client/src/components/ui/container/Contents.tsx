@@ -1,7 +1,8 @@
 import {useSearchParams} from "react-router-dom";
 import React from "react";
-import NewSaleForm from "../../form/NewSaleForm/NewSaleForm.tsx";
+import NewSaleForm from "../../form/new sale form/NewSaleForm.tsx";
 import SaleView from "../../view/SaleView.tsx";
+import ApplicationForm from "../../form/application form/ApplicationForm.tsx";
 
 type ContentPaddingProps = {
   children: React.ReactNode
@@ -17,7 +18,7 @@ const Contents = () => {
     case "newSale":
       return <ContentPadding><NewSaleForm/></ContentPadding>
     case "newApplication":
-      return <ContentPadding>Creation d'un adhesion</ContentPadding>
+      return <ContentPadding><ApplicationForm/></ContentPadding>
     case "newPatient":
       return <ContentPadding>Ajout d'un nouveau patient</ContentPadding>
     case "sale":

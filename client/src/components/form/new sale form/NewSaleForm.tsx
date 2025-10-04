@@ -79,7 +79,7 @@ const NewSaleForm = () => {
         />
       </div>
       <hr/>
-      <div className="sticky top-10 py-2 bg-white/1 backdrop-blur-md">
+      <div className="py-2 bg-white/1">
         <Select
           items={products}
           getLabel={(p) => p.name}

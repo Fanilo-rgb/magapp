@@ -3,7 +3,7 @@
 /**
  * Ajoute des jours à une date
  */
-export function addDays(date: Date, days: number): Date {
+export const addDays = (date: Date, days: number) => {
   const newDate = new Date(date);
   newDate.setDate(newDate.getDate() + days);
   return newDate;
@@ -12,7 +12,7 @@ export function addDays(date: Date, days: number): Date {
 /**
  * Ajoute des heures à une date
  */
-export function addHours(date: Date, hours: number): Date {
+export const addHours = (date: Date, hours: number) => {
   const newDate = new Date(date);
   newDate.setHours(newDate.getHours() + hours);
   return newDate;
@@ -21,7 +21,7 @@ export function addHours(date: Date, hours: number): Date {
 /**
  * Différence en jours entre deux dates
  */
-export function diffInDays(d1: Date, d2: Date): number {
+export const diffInDays = (d1: Date, d2: Date) => {
   const diffMs = d2.getTime() - d1.getTime();
   return Math.floor(diffMs / (1000 * 60 * 60 * 24));
 }
@@ -29,21 +29,21 @@ export function diffInDays(d1: Date, d2: Date): number {
 /**
  * Vérifie si une date est passée
  */
-export function isPast(date: Date): boolean {
+export const isPast = (date: Date) => {
   return date.getTime() < Date.now();
 }
 
 /**
  * Vérifie si une date est dans le futur
  */
-export function isFuture(date: Date): boolean {
+export const isFuture = (date: Date) => {
   return date.getTime() > Date.now();
 }
 
 /**
  * Retourne le temps écoulé en texte ("il y a 2 jours")
  */
-export function timeAgo(date: Date): string {
+export const timeAgo = (date: Date) => {
   const diffMs = Date.now() - date.getTime();
   const seconds = Math.floor(diffMs / 1000);
   const minutes = Math.floor(seconds / 60);
@@ -59,7 +59,7 @@ export function timeAgo(date: Date): string {
 /**
  * Formate une date au format français
  */
-export function formatDateFr(date: Date): string {
+export const formatDateFr = (date: Date) => {
   return date.toLocaleDateString("fr-FR", {
     year: "numeric",
     month: "2-digit",
@@ -70,10 +70,15 @@ export function formatDateFr(date: Date): string {
 /**
  * Formate une heure au format français
  */
-export function formatTimeFr(date: Date): string {
+export const formatTimeFr = (date: Date) => {
   return date.toLocaleTimeString("fr-FR", {
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
   });
 }
+
+export const formatDate = (date: Date | null) => {
+  if (!date || isNaN(date.getTime())) return ""; // si invalid → chaîne vide
+  return date.toISOString().split("T")[0];
+};
