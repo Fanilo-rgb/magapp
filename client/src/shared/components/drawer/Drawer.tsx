@@ -1,8 +1,8 @@
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {useEffect, useRef} from "react";
 import {ChevronsRight} from "lucide-react";
-import Button from "../../buttons/Button.tsx";
-import Contents from "../Contents.tsx";
+import Button from "../buttons/Button.tsx";
+import Contents from "./Contents.tsx";
 
 const Drawer = () => {
   const [searchParams] = useSearchParams()

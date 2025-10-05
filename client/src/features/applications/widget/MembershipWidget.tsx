@@ -1,9 +1,9 @@
-import WidgetContainer from "../WidgetContainer.tsx";
+import WidgetContainer from "../../../shared/components/WidgetContainer.tsx";
 import { Banknote, CircleUserRound, ClipboardPen } from "lucide-react";
 import ApplicationItem from "./ApplicationItem.tsx";
 import { useMemo } from "react";
-import LimitButton from "../../ui/buttons/LimitButton.tsx";
-import { useLimitList } from "../../../lib/hooks/useLimitList.ts"
+import LimitButton from "../../../shared/components/buttons/LimitButton.tsx";
+import { useLimitList } from "../../../shared/hooks/useLimitList.ts"
 
 const applications = [
   {

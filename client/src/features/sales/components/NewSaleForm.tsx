@@ -1,9 +1,9 @@
-import ChoicesList from "../../ui/inputs/ChoicesList.tsx";
-import type {Label} from "../../../lib/types/types.ts";
+import ChoicesList from "../../../shared/components/inputs/ChoicesList.tsx";
+import type {Label} from "../../../shared/types/types.ts";
 import {HandCoins, NotebookPen, Trash, UserRoundCog} from "lucide-react";
 import {useState} from "react";
-import Select from "../../ui/inputs/Select.tsx";
-import Button from "../../ui/buttons/Button.tsx";
+import Select from "../../../shared/components/inputs/Select.tsx";
+import Button from "../../../shared/components/buttons/Button.tsx";
 
 const personChoices: Label[] = [
   { value: "distributor", placeholder: "Distributeur", color: "purple" },

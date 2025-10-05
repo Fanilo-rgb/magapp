@@ -1,6 +1,6 @@
 import {Outlet} from "react-router-dom";
-import Header from "../components/header/Header.tsx";
-import Drawer from "../components/ui/container/drawer/Drawer.tsx";
+import Header from "../shared/components/header/Header.tsx";
+import Drawer from "../shared/components/drawer/Drawer.tsx";
 
 const RootLayout = () => {
   return (

@@ -1,10 +1,10 @@
-import type {Label} from "../../../lib/types/types.ts";
-import ChoicesList from "../../ui/inputs/ChoicesList.tsx";
+import type {Label} from "../../../shared/types/types.ts";
+import ChoicesList from "../../../shared/components/inputs/ChoicesList.tsx";
 import {CircleSmall, Earth} from "lucide-react";
-import InputDate from "../../ui/inputs/InputDate.tsx";
+import InputDate from "../../../shared/components/inputs/InputDate.tsx";
 import {useState} from "react";
-import {formatDate} from "../../../lib/utils/dateUtils.ts";
-import Button from "../../ui/buttons/Button.tsx";
+import {formatDate} from "../../../shared/utils/dateUtils.ts";
+import Button from "../../../shared/components/buttons/Button.tsx";
 
 const genderChoices: Label[] = [
   { value: "none", placeholder: "Non precis", color: "gray" },

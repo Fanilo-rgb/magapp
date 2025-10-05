@@ -1,4 +1,4 @@
-import Button from "../ui/buttons/Button.tsx";
+import Button from "../buttons/Button.tsx";
 import {Clipboard, type LucideIcon, Plus, ReceiptText, UserRoundPen} from "lucide-react";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";

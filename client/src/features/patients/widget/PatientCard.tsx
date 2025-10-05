@@ -1,5 +1,5 @@
 import {Mars, Venus} from "lucide-react";
-import {timeAgo} from "../../../lib/utils/dateUtils.ts";
+import {timeAgo} from "../../../shared/utils/dateUtils.ts";
 import {useNavigate} from "react-router-dom";
 
 type Props = {

@@ -1,9 +1,9 @@
-import WidgetContainer from "../WidgetContainer.tsx";
+import WidgetContainer from "../../../shared/components/WidgetContainer.tsx";
 import {Banknote, ReceiptText} from "lucide-react";
 import {useMemo} from "react";
 import SaleItem from "./SaleItem.tsx";
-import LimitButton from "../../ui/buttons/LimitButton.tsx";
-import {useLimitList} from "../../../lib/hooks/useLimitList.ts";
+import LimitButton from "../../../shared/components/buttons/LimitButton.tsx";
+import {useLimitList} from "../../../shared/hooks/useLimitList.ts";
 
 const sales = [
   {

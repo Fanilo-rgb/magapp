@@ -1,6 +1,6 @@
-import IconButton from "../../ui/buttons/IconButton.tsx";
+import IconButton from "../../../shared/components/buttons/IconButton.tsx";
 import {Ellipsis} from "lucide-react";
-import {formatNumber} from "../../../lib/utils/formatNumber.ts";
+import {formatNumber} from "../../../shared/utils/formatNumber.ts";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 

@@ -1,9 +1,10 @@
 import {useSearchParams} from "react-router-dom";
 import React, {type JSX} from "react";
-import NewSaleForm from "../../form/new sale form/NewSaleForm.tsx";
-import SaleView from "../../view/SaleView.tsx";
-import ApplicationForm from "../../form/application form/ApplicationForm.tsx";
-import ApplicationView from "../../view/ApplicationView.tsx";
+import NewSaleForm from "../../../features/sales/components/NewSaleForm.tsx";
+import SaleView from "../../../features/sales/components/SaleView.tsx";
+import ApplicationForm from "../../../features/applications/components/ApplicationForm.tsx";
+import ApplicationView from "../../../features/applications/components/ApplicationView.tsx";
+import PatientForm from "../../../features/patients/components/PatientForm.tsx";
 
 type ContentPaddingProps = {
   children: React.ReactNode
@@ -25,7 +26,7 @@ const Contents = () => {
       c = <ApplicationForm/>
       break
     case "newPatient":
-      c = <div>Formulaire de patient</div>
+      c = <div><PatientForm/></div>
       break
     case "sale":
       c = <SaleView/>

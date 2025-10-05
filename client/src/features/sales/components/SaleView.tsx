@@ -1,7 +1,7 @@
 import {useSearchParams} from "react-router-dom";
-import ChoicesList from "../ui/inputs/ChoicesList.tsx";
+import ChoicesList from "../../../shared/components/inputs/ChoicesList.tsx";
 import {HandCoins, NotebookPen, UserRoundCog} from "lucide-react";
-import type {Label} from "../../lib/types/types.ts";
+import type {Label} from "../../../shared/types/types.ts";
 
 const SaleView = () => {
 

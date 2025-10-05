@@ -1,6 +1,6 @@
-import WidgetContainer from "../WidgetContainer.tsx";
+import WidgetContainer from "../../../shared/components/WidgetContainer.tsx";
 import { FileUser } from "lucide-react";
-import Carousel from "../../ui/carousel/Carousel.tsx";
+import Carousel from "../../../shared/components/carousel/Carousel.tsx";
 import PatientCard from "./PatientCard.tsx";
 import {useMemo} from "react";
 

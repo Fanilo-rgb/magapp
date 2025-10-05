@@ -1,6 +1,6 @@
 import React, {type JSX} from 'react'
 import {type LucideIcon, Plus} from "lucide-react";
-import Button from "../ui/buttons/Button.tsx";
+import Button from "./buttons/Button.tsx";
 import {useNavigate} from "react-router-dom";
 
 type Props = {

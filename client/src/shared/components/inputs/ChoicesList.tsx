@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import {type LucideIcon} from "lucide-react";
-import type {Label, Color} from "../../../lib/types/types.ts";
+import type {Label, Color} from "../../types/types.ts";
 
 type ChoicesListProps = {
   icon: LucideIcon

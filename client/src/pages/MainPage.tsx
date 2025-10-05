@@ -1,7 +1,7 @@
-import SaleWidget from "../components/widgets/sale/SaleWidget.tsx";
-import MembershipWidget from "../components/widgets/membership/MembershipWidget.tsx";
-import Hello from "../components/widgets/fun/Hello.tsx";
-import PatientWidget from "../components/widgets/patient/PatientWidget.tsx";
+import SaleWidget from "../features/sales/widget/SaleWidget.tsx";
+import MembershipWidget from "../features/applications/widget/MembershipWidget.tsx";
+import Hello from "../shared/widgets/fun/Hello.tsx";
+import PatientWidget from "../features/patients/widget/PatientWidget.tsx";
 
 const MainPage = () => {
 
