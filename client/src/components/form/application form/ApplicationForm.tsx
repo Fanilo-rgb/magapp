@@ -13,7 +13,7 @@ const genderChoices: Label[] = [
 ]
 
 const nationalityChoices: Label[] = [
-  { value: "malagasy", placeholder: "Malagasy", color: "gray" },
+  { value: "malagasy", placeholder: "Malagasy", color: "green" },
 ]
 
 const ApplicationForm = () => {

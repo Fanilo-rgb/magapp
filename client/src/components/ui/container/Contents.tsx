@@ -1,8 +1,9 @@
 import {useSearchParams} from "react-router-dom";
-import React from "react";
+import React, {type JSX} from "react";
 import NewSaleForm from "../../form/new sale form/NewSaleForm.tsx";
 import SaleView from "../../view/SaleView.tsx";
 import ApplicationForm from "../../form/application form/ApplicationForm.tsx";
+import ApplicationView from "../../view/ApplicationView.tsx";
 
 type ContentPaddingProps = {
   children: React.ReactNode
@@ -14,22 +15,37 @@ const Contents = () => {
 
   const content = searchParams.get("content")
 
+  let c: JSX.Element | null = null
+
   switch (content) {
     case "newSale":
-      return <ContentPadding><NewSaleForm/></ContentPadding>
+      c = <NewSaleForm/>
+      break
     case "newApplication":
-      return <ContentPadding><ApplicationForm/></ContentPadding>
+      c = <ApplicationForm/>
+      break
     case "newPatient":
-      return <ContentPadding>Ajout d'un nouveau patient</ContentPadding>
+      c = <div>Formulaire de patient</div>
+      break
     case "sale":
-      return <ContentPadding><SaleView/></ContentPadding>
+      c = <SaleView/>
+      break
     case "application":
-      return <ContentPadding>Vue d'une adhesion</ContentPadding>
+      c = <ApplicationView/>
+      break
     case "patient":
-      return <ContentPadding>Vue des info d'un patient</ContentPadding>
+      c = <div>Vue des infos d'un patient</div>
+      break
     default:
-      return <ContentPadding>Contenu par defaut</ContentPadding>
+      c = <div>Contenu par defaut</div>
+      break
   }
+
+  return (
+    <ContentPadding>
+      {c}
+    </ContentPadding>
+  )
 }
 export default Contents
 
