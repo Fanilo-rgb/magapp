@@ -15,7 +15,7 @@ const Contents = () => {
 
   const content = searchParams.get("content")
 
-  let c: JSX.Element | null = null
+  let c: JSX.Element | null
 
   switch (content) {
     case "newSale":
