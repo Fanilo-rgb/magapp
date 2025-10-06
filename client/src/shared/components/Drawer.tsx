@@ -36,26 +36,19 @@ const Drawer = ({children, onClose, isOpen}: DrawerProps) => {
   if (!isOpen) return null
 
   return (
-    <div className="fixed z-20 w-screen h-screen bg-white/10 left-0 top-0 ">
+    <div className="fixed z-20 w-screen h-screen inset-0 bg-white/10 ">
       <div
         ref={dropdownRef}
-        className="absolute right-0 top-0 bottom-0 flex flex-col w-full sm:w-md md:w-2xl bg-white/10 backdrop-blur-md shadow-2xl overflow-auto"
+        className="absolute right-0 top-0 bottom-0 flex flex-col w-full sm:w-md md:w-2xl bg-white/80 backdrop-blur-md shadow-2xl overflow-auto"
       >
-        <div className="z-10 sticky top-0 flex items-center justify-between bg-gradient-to-b from-white to-transparent backdrop-blur-sm py-1 px-2 min-h-10">
+        <div className="z-10 sticky top-0 flex shadow items-center justify-between bg-white/90 py-1 px-2 min-h-10">
           <div className="flex gap-2">
-            <Button
-              onClick={onClose}
-              icon={ChevronsRight}
-            />
+            <Button onClick={onClose} icon={ChevronsRight}/>
           </div>
-          <div>
-            item 2
-          </div>
+          <div>item 2</div>
         </div>
-        <div className="relative">
-          <div className="relative px-12 h-fit w-full">
-            {children}
-          </div>
+        <div className="relative px-12 h-fit w-full z-0">
+          {children}
         </div>
       </div>
     </div>
