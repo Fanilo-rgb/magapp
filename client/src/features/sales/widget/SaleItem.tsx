@@ -27,7 +27,7 @@ const SaleItem = ({data}: Props) => {
   const isMid = useMediaQuery("md", "up")
 
   const handleClick = () => {
-    navigate(`?container=drawer&content=sale${data.isCustomer ? `&customerId=${data.id}` : `&id=${data.id}`}`)
+    navigate(`?type=drawer&content=sale${data.isCustomer ? `&customerId=${data.id}` : `&id=${data.id}`}`)
   }
 
   return (

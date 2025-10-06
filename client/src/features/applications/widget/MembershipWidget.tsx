@@ -72,7 +72,7 @@ const MembershipWidget = () => {
       title="Adhésion"
       icon={ClipboardPen}
       header={header}
-      buttonLink="?container=drawer&content=newApplication"
+      buttonLink="?type=drawer&content=addApplication"
     >
       <div className="flex flex-col gap-2">
         {sliced.map((application) => (

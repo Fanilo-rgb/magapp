@@ -96,7 +96,7 @@ const SaleWidget = () => {
   );
 
   return (
-    <WidgetContainer title="Achats" icon={ReceiptText} header={header} buttonLink="?container=drawer&content=newSale">
+    <WidgetContainer title="Achats" icon={ReceiptText} header={header} buttonLink="?type=drawer&content=addSale">
       <div className="flex flex-col gap-2">
         {sliced.map(sale => (
           <SaleItem key={sale.id} data={sale}/>

@@ -19,7 +19,7 @@ const PatientCard = ({data}: Props) => {
   const iconStyle = `absolute bottom-0 left-2 h-8 w-8 p-1 translate-y-1/2 rounded-full ${data.gender === "male" ? "bg-sky-100 text-sky-500 rounded-tr-md" : "bg-pink-100 text-pink-500"}`
 
   const handleClick = () => {
-    const link = `?container=drawer&content=patient&id=${data.id}`
+    const link = `?type=drawer&content=patient&id=${data.id}`
 
     navigate(link)
   }

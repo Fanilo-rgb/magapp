@@ -11,9 +11,9 @@ type actionButtonType = {
 }
 
 const buttons: actionButtonType[] = [
-  { content: "newSale", icon: ReceiptText, placeholder: "... un achat" },
-  { content: "newApplication", icon: Clipboard, placeholder: "... une adhesion" },
-  { content: "newPatient", icon: UserRoundPen, placeholder: "... un patient" },
+  { content: "addSale", icon: ReceiptText, placeholder: "... un achat" },
+  { content: "addApplication", icon: Clipboard, placeholder: "... une adhesion" },
+  { content: "addPatient", icon: UserRoundPen, placeholder: "... un patient" },
 ]
 
 const Header = () => {
@@ -23,7 +23,7 @@ const Header = () => {
   const navigate = useNavigate()
 
   const handleCreateSale = (content: string) => {
-    navigate(`?container=drawer&content=${content}`)
+    navigate(`?type=drawer&content=${content}`)
   }
 
   const sideWidth = "h-full w-32"

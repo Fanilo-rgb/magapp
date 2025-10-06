@@ -1,6 +1,6 @@
 import WidgetContainer from "../../../shared/components/WidgetContainer.tsx";
 import { FileUser } from "lucide-react";
-import Carousel from "../../../shared/components/carousel/Carousel.tsx";
+import Carousel from "../../../shared/components/Carousel.tsx";
 import PatientCard from "./PatientCard.tsx";
 import {useMemo} from "react";
 
@@ -79,7 +79,7 @@ const PatientWidget = () => {
   )
 
   return (
-    <WidgetContainer title="Patients" icon={FileUser} header={header} buttonLink="?container=drawer&content=newPatient">
+    <WidgetContainer title="Patients" icon={FileUser} header={header} buttonLink="?type=drawer&content=addPatient">
       <div className="w-full h-36">
         <Carousel>
           {patients.length > 0 && patients.map(patient => (

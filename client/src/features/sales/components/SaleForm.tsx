@@ -29,7 +29,7 @@ const products = [
   { id: 3, name: "Raisin", price: 2500, bv: 1.5 }
 ]
 
-const NewSaleForm = () => {
+const SaleForm = () => {
 
   const handleSelect = ( p: typeof products[0]) => {
     console.log("Produit choisi:", p)
@@ -227,4 +227,4 @@ const NewSaleForm = () => {
     </div>
   )
 }
-export default NewSaleForm
+export default SaleForm

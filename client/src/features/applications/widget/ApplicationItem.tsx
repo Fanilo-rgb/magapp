@@ -31,7 +31,7 @@ const ApplicationItem = ({data}: Props) => {
   const navigate = useNavigate()
 
   const handleClick = () => {
-    navigate(`?container=drawer&content=application&id=${data.id}`)
+    navigate(`?type=drawer&content=application&id=${data.id}`)
   }
 
   return (

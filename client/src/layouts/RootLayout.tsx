@@ -1,6 +1,6 @@
 import {Outlet} from "react-router-dom";
 import Header from "../shared/components/header/Header.tsx";
-import Drawer from "../shared/components/drawer/Drawer.tsx";
+import UIContainer from "../shared/components/UIContainer.tsx";
 
 const RootLayout = () => {
   return (
@@ -23,7 +23,7 @@ const RootLayout = () => {
         </div>
       </div>
 
-      <Drawer/>
+      <UIContainer/>
 
     </div>
   )
