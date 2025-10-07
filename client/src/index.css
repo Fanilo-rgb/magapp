@@ -22,7 +22,7 @@
 
 @layer components {
     .widget {
-        @apply relative w-full mx-auto sm:w-md md:w-lg lg:w-2xl transition pb-2
+        @apply relative w-full max-w-md mx-auto md:max-w-lg  lg:max-w-2xl transition pb-2
     }
 
     .verticalDivider {
