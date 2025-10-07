@@ -43,6 +43,7 @@ const DistributorView = () => {
           Andriambololona Faniloniaina Princy
         </p>
       </div>
+
       <div className="flex flex-col gap-2">
         <ChoicesList
           icon={NotebookPen}

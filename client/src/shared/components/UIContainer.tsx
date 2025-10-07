@@ -9,6 +9,7 @@ import SaleForm from "../../features/sales/components/SaleForm.tsx";
 import PatientForm from "../../features/patients/components/PatientForm.tsx";
 import SaleView from "../../features/sales/components/SaleView.tsx";
 import ApplicationView from "../../features/applications/components/ApplicationView.tsx";
+import PatientView from "../../features/patients/components/PatientView.tsx";
 
 type BaseProps = { onClose?: () => void }
 
@@ -18,6 +19,7 @@ const componentMap: Record<string, React.FC<BaseProps>> = {
   addPatient: PatientForm,
   sale: SaleView,
   application: ApplicationView,
+  patient: PatientView,
 }
 
 const UiContainer = () => {
