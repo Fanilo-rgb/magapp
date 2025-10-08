@@ -3,7 +3,7 @@ import {type LucideIcon} from "lucide-react";
 import type {Label, Color} from "../../types/types.ts";
 
 type ChoicesListProps = {
-  icon: LucideIcon
+  icon?: LucideIcon
   label?: string;
   choices: Label[];
   value?: string;
@@ -54,7 +54,7 @@ const ChoicesList = ({ icon: Icon, disable = false, label = "Description", choic
     <div className="flex items-center w-full relative">
       {/* Label */}
       <div className="cursor-default flex gap-1 text-gray-500 w-8 sm:w-44 bg-transparent p-1 rounded-sm transition">
-        <Icon size={16} />
+        {Icon && <Icon size={16} />}
         <span className="hidden sm:block">{label}</span>
       </div>
 
