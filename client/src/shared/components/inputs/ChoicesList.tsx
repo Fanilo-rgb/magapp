@@ -53,9 +53,9 @@ const ChoicesList = ({ icon: Icon, disable = false, label = "Description", choic
   return (
     <div className="flex items-center w-full relative">
       {/* Label */}
-      <div className="cursor-default flex gap-1 text-gray-500 w-44 bg-transparent p-1 rounded-sm transition">
+      <div className="cursor-default flex gap-1 text-gray-500 w-8 sm:w-44 bg-transparent p-1 rounded-sm transition">
         <Icon size={16} />
-        <span>{label}</span>
+        <span className="hidden sm:block">{label}</span>
       </div>
 
       {/* Selected */}

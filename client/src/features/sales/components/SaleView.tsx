@@ -11,7 +11,7 @@ const SaleView = () => {
   const customerContent = searchParams.get("customerId")
 
   return (
-    <div className="relative flex flex-col gap-4 py-4">
+    <div className="relative flex flex-col gap-4">
 
       {distContent && <DistributorView/>}
 

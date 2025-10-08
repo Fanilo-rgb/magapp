@@ -58,7 +58,7 @@ const MembershipWidget = () => {
         <span className="font-semibold text-gray-500">{applications.length}</span>
       </div>
       <span className="verticalDivider" />
-      <div className="flex items-center gap-2">
+      <div className="hidden sm:flex items-center gap-2">
         <Banknote size={16} />
         <span className="font-semibold text-gray-500">
           {membershipValue.toLocaleString()} ar
