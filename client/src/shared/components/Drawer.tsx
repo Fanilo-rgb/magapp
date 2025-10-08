@@ -47,7 +47,7 @@ const Drawer = ({children, onClose, isOpen}: DrawerProps) => {
           </div>
           <div>item 2</div>
         </div>
-        <div className="relative px-12 h-fit w-full z-0">
+        <div className="relative px-12 h-fit w-full z-0 py-4">
           {children}
         </div>
       </div>

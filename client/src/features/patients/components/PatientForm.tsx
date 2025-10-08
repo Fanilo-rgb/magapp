@@ -22,7 +22,7 @@ const PatientForm = () => {
   const [birthDate, setBirthDate] = useState<Date | null>(null)
 
   return (
-    <div className="relative flex flex-col gap-4 py-4">
+    <div className="relative flex flex-col gap-4">
       <div>
         <input
           type="text"

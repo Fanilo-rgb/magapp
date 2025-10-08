@@ -9,7 +9,7 @@ const ApplicationView = () => {
   const nationality: Label[] = [{ value: "malagasy", placeholder: "Malagasy", color: "green" }]
 
   return (
-    <div className="relative flex flex-col gap-4 py-4">
+    <div className="relative flex flex-col gap-4">
       <div className="flex justify-end">
         <span className="text-gray-500">Il y a 2h</span>
       </div>

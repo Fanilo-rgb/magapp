@@ -10,6 +10,7 @@ import PatientForm from "../../features/patients/components/PatientForm.tsx";
 import SaleView from "../../features/sales/components/SaleView.tsx";
 import ApplicationView from "../../features/applications/components/ApplicationView.tsx";
 import PatientView from "../../features/patients/components/PatientView.tsx";
+import ProductView from "../../features/products/components/ProductView.tsx";
 
 type BaseProps = { onClose?: () => void }
 
@@ -20,6 +21,7 @@ const componentMap: Record<string, React.FC<BaseProps>> = {
   sale: SaleView,
   application: ApplicationView,
   patient: PatientView,
+  product: ProductView
 }
 
 const UiContainer = () => {
@@ -32,6 +34,7 @@ const UiContainer = () => {
   const close = () => {
     searchParams.delete("type")
     searchParams.delete("content")
+    searchParams.delete("id")
     setSearchParams(searchParams)
   }
 

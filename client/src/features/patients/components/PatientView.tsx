@@ -12,7 +12,7 @@ const PatientView = () => {
   ]
 
   return (
-    <div className="relative flex flex-col gap-4 py-4">
+    <div className="relative flex flex-col gap-4">
       <div className="flex justify-between">
         <span className="font-semibold">#00001</span>
         <span className="text-gray-500">Il y a 2h</span>

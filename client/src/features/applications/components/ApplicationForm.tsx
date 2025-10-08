@@ -21,7 +21,7 @@ const ApplicationForm = () => {
   const [birthDate, setBirthDate] = useState<Date | null>(new Date())
 
   return (
-    <div className="relative flex flex-col gap-4 py-4">
+    <div className="relative flex flex-col gap-4">
 
       <div className="pl-5 text-gray-400 font-semibold">
         Details du demandeur
