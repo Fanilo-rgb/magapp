@@ -68,6 +68,12 @@ const ProductList = () => {
             Bv
           </button>
         </div>
+        <span className="verticalDivider" />
+        <div className="w-20">
+          <button className="p-1 rounded-lg w-full">
+            En stock
+          </button>
+        </div>
       </div>
       <div className="flex flex-col flex-1 mt-2 overflow-auto gap-2 divide-y divide-gray-300">
         {products.map(product => (
@@ -78,6 +84,7 @@ const ProductList = () => {
             name={product.name}
             price={product.price}
             bv={product.bv}
+            qt={10}
           />
         ))}
       </div>

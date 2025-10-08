@@ -4,10 +4,11 @@ type ProductItemProps = {
   name: string
   price: number
   bv: number
+  qt: number
   onClick?: () => void
 }
 
-const ProductItem = ({ order, name, price, bv, onClick }: ProductItemProps) => {
+const ProductItem = ({ order, name, price, bv, qt, onClick }: ProductItemProps) => {
 
   return (
     <div
@@ -30,6 +31,10 @@ const ProductItem = ({ order, name, price, bv, onClick }: ProductItemProps) => {
       <span className="verticalDivider" />
       <div className="w-16 text-center">
         {bv}
+      </div>
+      <span className="verticalDivider" />
+      <div className="w-20 text-center">
+        {qt}
       </div>
     </div>
   )
