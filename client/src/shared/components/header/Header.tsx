@@ -1,8 +1,9 @@
 import Button from "../buttons/Button.tsx";
-import {Clipboard, type LucideIcon, Plus, ReceiptText, UserRoundPen} from "lucide-react";
+import {Clipboard, type LucideIcon, Plus, ReceiptText, SidebarOpen, UserRoundPen} from "lucide-react";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import SearchBar from "./SearchBar.tsx";
+import {useSidebarStore} from "../../../features/sidebar/store/sidebarStore.ts";
 
 type actionButtonType = {
   content: string
@@ -20,6 +21,8 @@ const Header = () => {
 
   const [showMenu, setShowMenu] = useState(false)
 
+  const toggleSidebar = useSidebarStore((state) => state.toggleSidebar)
+
   const navigate = useNavigate()
 
   const handleCreateSale = (content: string) => {
@@ -32,7 +35,7 @@ const Header = () => {
     <div className="relative flex items-center py-1 px-3 gap-2 h-14 z-10">
 
       <div className={sideWidth}>
-        Item 1
+        <Button onClick={toggleSidebar} icon={SidebarOpen} />
       </div>
 
       <div className="flex flex-1 justify-center items-center h-full">
