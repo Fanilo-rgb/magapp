@@ -18,6 +18,10 @@
     hr {
         @apply border-gray-300 my-2
     }
+
+    h2 {
+        @apply text-xl font-semibold text-gray-700
+    }
 }
 
 @layer components {

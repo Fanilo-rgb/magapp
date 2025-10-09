@@ -1,5 +1,5 @@
-import ProductList from "../features/products/components/ProductList.tsx";
-import Button from "../shared/components/buttons/Button.tsx";
+import ProductList from "./components/ProductList.tsx";
+import Button from "../../shared/components/buttons/Button.tsx";
 import {useNavigate} from "react-router-dom";
 
 const ProductPage = () => {

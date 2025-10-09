@@ -43,6 +43,12 @@ const Sidebar = () => {
           >
             Products
           </div>
+          <div
+            onClick={() => handleClick("/sales")}
+            className="p-2 bg-transparent hover:bg-black/10 rounded-lg cursor-pointer transition font-semibold text-gray-600"
+          >
+            Achats
+          </div>
         </div>
 
       </div>
