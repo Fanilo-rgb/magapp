@@ -33,5 +33,8 @@
     // "noUncheckedSideEffectImports": true
   },
   "exclude": ["node_modules"],
-  "include": ["src"]
+  "include": [
+    "src",
+    "node_modules/@types/axios/index.d.ts"
+  ]
 }
