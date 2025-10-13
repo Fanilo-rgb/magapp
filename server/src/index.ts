@@ -2,32 +2,34 @@ import "dotenv/config";
 
 import express from 'express';
 import cors from 'cors';
-import axios from 'axios';
 
-import { NODE_ENV, PORT } from "./constants/env"
+import {APP_ORIGIN, NODE_ENV, PORT} from "./constants/env"
 import connectToDatabase from "./config/db";
+
+import productRouter from "./routes/product.routes"
+import errorHandler from "./middleware/errorHandler";
+import {OK} from "./constants/http";
 
 const app = express();
 
-app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(
+  cors({
+    origin: APP_ORIGIN
+  })
+);
 
-app.get("/", (req, res) => {
-  res.send({ message: "Hello, World!" });
+app.use("api/v1/products", productRouter)
+
+app.get("/", (req, res, next) => {
+  return res.status(OK).send({
+    success: true,
+    message: "API is running..."
+  })
 })
 
-const fastapi = axios.create({
-  baseURL: 'http://localhost:8000/',
-})
-
-app.get('/api/v1/products', async (req, res) => {
-  const response = await fastapi.get('/products')
-
-  if (!response) return res.status(500).send({ success: false, message: 'Error fetching products' })
-
-  return res.status(200).send(response.data)
-})
+app.use(errorHandler)
 
 app.listen(PORT, async () => {
   console.log(`Server is running on http://localhost:${PORT} in ${NODE_ENV} mode`);
