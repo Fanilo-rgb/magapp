@@ -18,14 +18,14 @@ app.use(
   cors({
     origin: APP_ORIGIN
   })
-);
+)
 
 app.use("api/v1/products", productRouter)
 
 app.get("/", (req, res, next) => {
   return res.status(OK).send({
     success: true,
-    message: "API is running..."
+    message: "healthy"
   })
 })
 
