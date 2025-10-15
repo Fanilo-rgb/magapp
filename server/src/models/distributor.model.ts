@@ -13,8 +13,8 @@ export interface DistributorDocument extends mongoose.Document {
   email?: string
   address?: string
   postalCode?: number
-  upLine?: mongoose.Schema.Types.ObjectId
-  sponsor?: mongoose.Schema.Types.ObjectId
+  upLine?: mongoose.Types.ObjectId
+  sponsor?: mongoose.Types.ObjectId
   status: "active" | "inactive" | "suspended"
   isDeleted: boolean
   closed: boolean
@@ -68,12 +68,12 @@ const distributorSchema = new Schema<DistributorDocument>({
   address: { type: String, default: "Antananarivo" },
   postalCode: { type: Number, default: 101 },
   upLine: {
-    type: mongoose.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Distributor",
     default: null
   },
   sponsor: {
-    type: mongoose.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Distributor",
     default: null
   },
