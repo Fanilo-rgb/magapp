@@ -9,6 +9,7 @@ import connectToDatabase from "./config/db";
 import productRouter from "./routes/product.routes"
 import errorHandler from "./middleware/errorHandler";
 import {OK} from "./constants/http";
+import distributorRouter from "./routes/distributor.routes";
 
 const app = express();
 
@@ -20,7 +21,8 @@ app.use(
   })
 )
 
-app.use("api/v1/products", productRouter)
+app.use("/api/v1/products", productRouter)
+app.use("/api/v1/distributors", distributorRouter)
 
 app.get("/", (req, res, next) => {
   return res.status(OK).send({

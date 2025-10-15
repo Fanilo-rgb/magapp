@@ -1,16 +1,19 @@
 import axios from "axios"
 import {FASTAPI_URL} from "../constants/env";
-import {Request, Response} from "express";
+import catchErrors from "../utils/catchErrors";
+import {createError} from "../global/function";
 
 const fastapi = axios.create({
   baseURL: FASTAPI_URL,
 })
 
-export const getProductsFromExcel = async (req: Request, res: Response) => {
-  const response = await fastapi.get('/products')
+export const getProductsFromExcel = catchErrors(
+  async (req, res) => {
+    const response = await fastapi.get('/products')
 
-  if (!response) return res.status(500).send({ success: false, message: 'Error fetching products' })
+    if (!response) throw createError("No response from FastAPI", 502)
 
-  return res.status(200).send(response.data)
-}
+    return res.status(200).send(response.data)
+  }
+)
 
