@@ -11,3 +11,6 @@ export const NODE_ENV = getEnv("NODE_ENV");
 export const MONGODB_URI = getEnv("MONGODB_URI");
 export const FASTAPI_URL = getEnv("FASTAPI_URL", "http://localhost:8000");
 export const APP_ORIGIN = getEnv("APP_ORIGIN", "http://localhost:5173");
+
+export const JWT_SECRET = getEnv("JWT_SECRET");
+export const JWT_EXPIRES_IN = getEnv("JWT_EXPIRES_IN", "1d");

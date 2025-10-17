@@ -32,6 +32,7 @@ const distributorSchema = new Schema<DistributorDocument>({
     type: String,
     unique: true,
     required: [true, 'Number card is required'],
+    index: true,
     minlength: [7, "Must be at least 7 characters."],
     maxlength: [8, "Must be under 8 characters."]
   },
@@ -124,8 +125,6 @@ distributorSchema.methods.restore = async function() {
 distributorSchema.methods.getMinimumInfo = function() {
   return `${this.numberCard} - ${this.name} ${this.surname}`
 }
-
-distributorSchema.index({ numberCard: 1 }, { unique: true });
 
 const DistributorModel = model<DistributorDocument>("Distributor", distributorSchema)
 

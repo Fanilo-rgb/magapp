@@ -6,10 +6,14 @@ import cors from 'cors';
 import {APP_ORIGIN, NODE_ENV, PORT} from "./constants/env"
 import connectToDatabase from "./config/db";
 
-import productRouter from "./routes/product.routes"
 import errorHandler from "./middleware/errorHandler";
 import {OK} from "./constants/http";
+
+import productRouter from "./routes/product.routes"
 import distributorRouter from "./routes/distributor.routes";
+import userRouter from "./routes/user.routes";
+import authRouter from "./routes/auth.routes";
+import shopRoutes from "./routes/shop.routes";
 
 const app = express();
 
@@ -20,6 +24,10 @@ app.use(
     origin: APP_ORIGIN
   })
 )
+
+app.use("/api/v1/auth", authRouter)
+app.use("/api/v1/users", userRouter)
+app.use("/api/v1/shops", shopRoutes)
 
 app.use("/api/v1/products", productRouter)
 app.use("/api/v1/distributors", distributorRouter)

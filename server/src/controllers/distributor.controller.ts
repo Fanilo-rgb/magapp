@@ -1,6 +1,6 @@
 import catchErrors from "../utils/catchErrors";
 import DistributorModel, {DistributorDocument} from "../models/distributor.model";
-import {CREATED, OK} from "../constants/http";
+import {BAD_REQUEST, CREATED, NOT_FOUND, OK} from "../constants/http";
 import {createError} from "../global/function";
 
 export const createDistributor = catchErrors(
@@ -8,12 +8,7 @@ export const createDistributor = catchErrors(
     const distributor: DistributorDocument = req.body
 
     const existing = await DistributorModel.findOne({ numberCard: distributor.numberCard })
-    if (existing) {
-      return res.status(400).send({
-        success: false,
-        message: "A distributor with this numberCard already exists"
-      })
-    }
+    if (existing) throw createError("A distributor with this numberCard already exists", 400)
 
     const newDistributor = new DistributorModel(distributor)
     await newDistributor.save()
@@ -44,7 +39,7 @@ export const getDistributors = catchErrors(
         }
       }).sort({ createdAt: -1 }).select("_id offlineId numberCard name surname")
 
-      return res.status(200).send({
+      return res.status(OK).send({
         success: true,
         data: distributors
       })
@@ -61,14 +56,14 @@ export const getDistributors = catchErrors(
         }
       }).sort({ createdAt: -1 }).select("_id offlineId numberCard name surname")
 
-      return res.status(200).send({
+      return res.status(OK).send({
         success: true,
         data: distributors
       })
     }
 
     const distributors = await DistributorModel.find().sort({ createdAt: -1 }).select("_id offlineId numberCard name surname")
-    return res.status(200).send({
+    return res.status(OK).send({
       success: true,
       data: distributors
     })
@@ -80,14 +75,14 @@ export const getDistributor = catchErrors(
     const { numberCard } = req.params
     const existing = await DistributorModel.exists({ numberCard })
 
-    if (!existing) throw createError("Distributor not found or doesn't exist", 404)
+    if (!existing) throw createError("Distributor not found or doesn't exist", NOT_FOUND)
 
     const distributor = await DistributorModel.findOne({ numberCard: numberCard })
       .select("-__v")
       .populate("upLine", "_id offlineId numberCard name surname")
       .populate("sponsor", "_id offlineId numberCard name surname")
 
-    return res.status(200).send({
+    return res.status(OK).send({
       success: true,
       data: distributor
     })
@@ -101,9 +96,9 @@ export const updateDistributor = catchErrors(
 
     const distributor: DistributorDocument | null = await DistributorModel.findOne({ _id: id })
 
-    if (!distributor) throw createError("Distributor not found or doesn't exist", 404)
+    if (!distributor) throw createError("Distributor not found or doesn't exist", NOT_FOUND)
 
-    if (!updates.numberCard || !updates.name) throw createError("numberCard and name are required fields", 400)
+    if (!updates.numberCard || !updates.name) throw createError("numberCard and name are required fields", BAD_REQUEST)
 
     //if exisisting card we can't update
 
@@ -111,7 +106,7 @@ export const updateDistributor = catchErrors(
 
     if (existing) {
       const info = existing.getMinimumInfo()
-      throw createError(`A distributor with this numberCard already exists: ${info}`, 400)
+      throw createError(`A distributor with this numberCard already exists: ${info}`, BAD_REQUEST)
     }
 
     distributor.numberCard = updates.numberCard
@@ -129,7 +124,7 @@ export const updateDistributor = catchErrors(
     distributor.sponsor = updates.sponsor
     await distributor.save()
 
-    return res.status(200).send({
+    return res.status(OK).send({
       success: true,
       message: "Distributor updated successfully",
       data: distributor
@@ -144,7 +139,7 @@ export const softDeleteDistributor = catchErrors(
 
     const distributor: DistributorDocument | null = await DistributorModel.findOne({ numberCard })
 
-    if (!distributor) throw createError("Distributor not found or doesn't exist", 404)
+    if (!distributor) throw createError("Distributor not found or doesn't exist", NOT_FOUND)
 
     await distributor.softDelete()
 
@@ -161,7 +156,7 @@ export const restoreDistributor = catchErrors(
 
     const distributor: DistributorDocument | null = await DistributorModel.findOne({ numberCard })
 
-    if (!distributor) throw createError("Distributor not found or doesn't exist", 404)
+    if (!distributor) throw createError("Distributor not found or doesn't exist", NOT_FOUND)
 
     await distributor.restore()
 
@@ -178,11 +173,11 @@ export const deleteDistributor = catchErrors(
 
     const distributor: DistributorDocument | null = await DistributorModel.findById(id)
 
-    if (!distributor) throw createError("Distributor not found or doesn't exist", 404)
+    if (!distributor) throw createError("Distributor not found or doesn't exist", NOT_FOUND)
 
     await distributor.deleteOne()
 
-    return res.status(200).send({
+    return res.status(OK).send({
       success: true,
       message: "Distributor deleted "
     })
