@@ -2,6 +2,7 @@ import catchErrors from "../utils/catchErrors";
 import ShopModel from "../models/shop.model";
 import {createError} from "../global/function";
 import {BAD_REQUEST, CREATED, NOT_FOUND, OK} from "../constants/http";
+import UserModel from "../models/user.model";
 
 export const createShop = catchErrors(
   async (req, res) => {
@@ -13,6 +14,8 @@ export const createShop = catchErrors(
 
     const newShop = new ShopModel({ name: name, owner: req.user?._id })
 
+    const owner = await UserModel.findById(req.user?._id)
+
     await newShop.save()
 
     return res.status(CREATED).send({
@@ -20,6 +23,7 @@ export const createShop = catchErrors(
       message: "Shop created successfully",
       data: newShop
     })
+
   }
 )
 

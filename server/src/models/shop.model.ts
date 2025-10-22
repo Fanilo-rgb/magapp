@@ -1,6 +1,7 @@
 import mongoose, {model, Schema} from "mongoose";
 
 export interface ShopDocument extends mongoose.Document {
+  _id: string
   name: string
   owner: mongoose.Types.ObjectId
   address?: string
