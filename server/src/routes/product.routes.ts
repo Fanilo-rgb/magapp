@@ -1,5 +1,5 @@
 import { Router } from "express"
-import {createProduct, deleteProduct, getProducts, getProductsFromExcel} from "../controllers/product.controller";
+import {createProduct, deleteProduct, getProducts, rebaseProduct} from "../controllers/product.controller";
 import authorize, {protect} from "../middleware/auth.middleware";
 
 const productRouter = Router()
@@ -14,6 +14,6 @@ productRouter.put("/:id", (req, res) => res.send({ message: "UPDATE product" }))
 
 productRouter.delete("/:id", authorize, protect(["shop_owner"]), deleteProduct)
 
-productRouter.get("/rebase", getProductsFromExcel)
+productRouter.get("/rebase", authorize, protect(["shop_owner"]), rebaseProduct)
 
 export default productRouter

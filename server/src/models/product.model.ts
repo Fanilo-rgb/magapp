@@ -1,6 +1,7 @@
 import mongoose, {model, Schema} from "mongoose";
 
 export interface ProductDocument extends mongoose.Document {
+  _id: string
   name: string
   bv: number
   order: number
