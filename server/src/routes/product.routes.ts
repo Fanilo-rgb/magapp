@@ -1,19 +1,27 @@
 import { Router } from "express"
-import {createProduct, deleteProduct, getProducts, rebaseProduct} from "../controllers/product.controller";
+import {
+  createProduct,
+  deleteProduct,
+  getProduct,
+  getShopProducts,
+  rebaseProduct,
+  updateProduct,
+  updateShopProduct
+} from "../controllers/product.controller";
 import authorize, {protect} from "../middleware/auth.middleware";
 
 const productRouter = Router()
 
-productRouter.get("/", authorize, protect(["shop_owner"]), getProducts)
+productRouter.get("/rebase", authorize, protect(["admin"]), rebaseProduct)
 
-productRouter.get("/:id", (req, res) => res.send({message: "GET product details"}))
+productRouter.get("/", authorize, protect(["shop_owner"]), getShopProducts)
+productRouter.get("/:id", authorize, protect(["shop_owner"]),getProduct)
 
-productRouter.post("/", authorize, protect(["shop_owner"]), createProduct)
+productRouter.post("/", authorize, protect(["admin"]), createProduct)
 
-productRouter.put("/:id", (req, res) => res.send({ message: "UPDATE product" }))
+productRouter.put("/:shopId/:id", authorize, protect(["shop_owner"]), updateShopProduct)
+productRouter.put("/:id", authorize, protect(["admin"]),updateProduct)
 
-productRouter.delete("/:id", authorize, protect(["shop_owner"]), deleteProduct)
-
-productRouter.get("/rebase", authorize, protect(["shop_owner"]), rebaseProduct)
+productRouter.delete("/:id", authorize, protect(["admin"]), deleteProduct)
 
 export default productRouter

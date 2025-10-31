@@ -30,16 +30,18 @@ type UserRole = UserDocument["role"]
 
 export const protect = (roles: UserRole[] = []) => {
   return catchErrors(async (req, res, next) => {
-    if (!req.user) throw createError("Unauthorized: You need to log in", UNAUTHORIZED)
+    if (!req.user) throw createError("Unauthorized: You need to log in", UNAUTHORIZED);
 
-    if (roles.length && !roles.includes(req.user.role)) throw createError("Unauthorized: must be a shop_owner or admin", FORBIDDEN)
+    if (roles.length && !roles.includes(req.user.role)) {
+      throw createError("Unauthorized: insufficient permissions", FORBIDDEN);
+    }
 
-    const shop = await ShopModel.findOne({ owner: req.user._id })
+    if (roles.includes("shop_owner")) {
+      const shop = await ShopModel.findOne({ owner: req.user._id });
+      if (!shop) throw createError("Shop not found", NOT_FOUND);
+      req.shop = shop;
+    }
 
-    if (!shop) throw createError("Shop not found", NOT_FOUND)
-
-    req.shop = shop
-
-    next()
-  })
-}
+    next();
+  });
+};
