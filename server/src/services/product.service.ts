@@ -1,5 +1,5 @@
 import fastapi from "../utils/fastapi";
-import {createError} from "../global/function";
+import {createError} from "../utils/function";
 import ProductModel, {
   ProductDocument,
   ProductShopDocument,

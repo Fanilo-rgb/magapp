@@ -1,5 +1,5 @@
 import catchErrors from "../utils/catchErrors";
-import {createError} from "../global/function";
+import {createError} from "../utils/function";
 import ProductModel, {ProductWithoutId, UpdateGlobalProductDto, UpdateShopProductDto} from "../models/product.model";
 import {BAD_REQUEST, CREATED, NOT_FOUND, OK, UNAUTHORIZED} from "../constants/http";
 import {

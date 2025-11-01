@@ -1,6 +1,6 @@
 import catchErrors from "../utils/catchErrors";
 import ShopModel from "../models/shop.model";
-import {createError} from "../global/function";
+import {createError} from "../utils/function";
 import {BAD_REQUEST, CREATED, NOT_FOUND, OK} from "../constants/http";
 import UserModel from "../models/user.model";
 

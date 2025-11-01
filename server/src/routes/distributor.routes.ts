@@ -5,14 +5,15 @@ import {
   getDistributors, restoreDistributor, softDeleteDistributor,
   updateDistributor
 } from "../controllers/distributor.controller";
+import authorize, {protect} from "../middleware/auth.middleware";
 
 const distributorRouter = Router();
 
-distributorRouter.get("/", getDistributors)
+distributorRouter.get("/", authorize, protect(["shop_owner"]), getDistributors)
 
-distributorRouter.get("/:numberCard", getDistributor)
+distributorRouter.get("/:numberCard", authorize, protect(["shop_owner"]), getDistributor)
 
-distributorRouter.post("/", createDistributor )
+distributorRouter.post("/", authorize, protect(["shop_owner"]), createDistributor )
 
 distributorRouter.put("/:id", updateDistributor)
 

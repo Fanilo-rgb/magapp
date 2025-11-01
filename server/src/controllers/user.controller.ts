@@ -1,7 +1,7 @@
 import catchErrors from "../utils/catchErrors";
 import UserModel from "../models/user.model";
 import {OK} from "../constants/http";
-import {createError} from "../global/function";
+import {createError} from "../utils/function";
 
 export const getUsers = catchErrors(
   async (req, res) => {

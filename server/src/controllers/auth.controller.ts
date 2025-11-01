@@ -2,7 +2,7 @@ import {RequestHandler} from "express";
 
 import mongoose from "mongoose";
 import UserModel, {UserDocument} from "../models/user.model";
-import {createError} from "../global/function";
+import {createError} from "../utils/function";
 import {CREATED, OK} from "../constants/http";
 import catchErrors from "../utils/catchErrors";
 import {createToken} from "../utils/jwt";

@@ -1,6 +1,7 @@
 import mongoose, {model, Schema} from "mongoose";
 
 export interface DistributorDocument extends mongoose.Document {
+  _id: string
   numberCard: string
   name: string
   surname: string
@@ -16,16 +17,19 @@ export interface DistributorDocument extends mongoose.Document {
   upLine?: mongoose.Types.ObjectId
   sponsor?: mongoose.Types.ObjectId
   status: "active" | "inactive" | "suspended"
+  shops: mongoose.Types.ObjectId[]
   isDeleted: boolean
   closed: boolean
-  closedAt?: Date
-  deletedAt?: Date
+  closedAt: Date | null
+  deletedAt: Date | null
   createdAt?: Date
   updatedAt?: Date
   softDelete(): Promise<void>
   restore(): Promise<void>
   getMinimumInfo(): string
 }
+
+export type DistributorType = Pick<DistributorDocument, "numberCard" | "name" | "surname" | "nationality" | "dateOfBirth" | "gender" | "phone" | "cin" | "email" | "address" | "postalCode" | "upLine" | "sponsor">
 
 const distributorSchema = new Schema<DistributorDocument>({
   numberCard: {
@@ -43,7 +47,7 @@ const distributorSchema = new Schema<DistributorDocument>({
     uppercase: true
   },
   surname: { type: String, trim: true },
-  offlineId: { type: String, default: null },
+  offlineId: { type: String, required: [true, "A offline id is required"] },
   nationality: {
     type: String,
     default: "malagasy"
@@ -86,6 +90,13 @@ const distributorSchema = new Schema<DistributorDocument>({
     },
     default: "active"
   },
+  shops: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Shop",
+      default: []
+    },
+  ],
   isDeleted: {
     type: Boolean,
     default: false

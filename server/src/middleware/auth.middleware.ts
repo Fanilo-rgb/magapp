@@ -1,7 +1,7 @@
 import {FORBIDDEN, NOT_FOUND, UNAUTHORIZED} from "../constants/http";
 import UserModel, {UserDocument} from "../models/user.model";
 import catchErrors from "../utils/catchErrors";
-import {createError} from "../global/function";
+import {createError} from "../utils/function";
 import {verifyToken} from "../utils/jwt";
 import ShopModel from "../models/shop.model";
 
