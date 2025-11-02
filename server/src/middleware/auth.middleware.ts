@@ -1,9 +1,10 @@
 import {FORBIDDEN, NOT_FOUND, UNAUTHORIZED} from "../constants/http";
-import UserModel, {UserDocument} from "../models/user.model";
+import {UserDocument} from "../models/user.model";
 import catchErrors from "../utils/catchErrors";
 import {createError} from "../utils/function";
 import {verifyToken} from "../utils/jwt";
 import ShopModel from "../models/shop.model";
+import {findUser} from "../services/user.service";
 
 const authorize = catchErrors(async (req, res, next) => {
   let token
@@ -16,11 +17,10 @@ const authorize = catchErrors(async (req, res, next) => {
 
   const decoded = verifyToken(token)
 
-  const user = await UserModel.findById((decoded as { userId: string }).userId)
+  const userId = (decoded as { userId: string }).userId
 
-  if (!user) throw createError("Unauthorized", UNAUTHORIZED)
+  req.user = await findUser(userId, createError("Unauthorized", UNAUTHORIZED))
 
-  req.user = user
   next()
 })
 

@@ -86,9 +86,11 @@ export const createProduct = catchErrors(async (req, res) => {
 
 export const getShopProducts = catchErrors(async (req, res) => {
 
-  if (!req.shop) throw createError("Shop not found", NOT_FOUND)
+  const shopId = req.shop?._id
 
-  const products = await getProductsForShop(req.shop._id)
+  if (!shopId) throw createError("Shop not found", NOT_FOUND)
+
+  const products = await getProductsForShop(shopId)
 
   return res.status(OK).send({
     success: true,

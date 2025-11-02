@@ -5,14 +5,17 @@ import ProductModel, {
   ProductShopDocument,
   ProductShopModel,
   ProductType,
-  ProductWithoutId, UpdateGlobalProductDto, UpdateShopProductDto
+  ProductWithoutId,
+  UpdateGlobalProductDto,
+  UpdateShopProductDto
 } from "../models/product.model";
 import {NOT_FOUND} from "../constants/http";
 
 export const getProductFromExcel = async (): Promise<ProductWithoutId[]> => {
   const response = await fastapi.get('/products')
   if (!response) throw createError("No response from FastAPI", 502)
-  return response.data
+
+  return response.data.data as ProductWithoutId[]
 }
 
 export const rebaseGlobalProducts = async (): Promise<ProductDocument[]> => {
@@ -95,14 +98,17 @@ export const getProductsForShop = async (shopId: string) => {
   const overrides: ProductShopDocument[] = await ProductShopModel.find({ shopId })
 
   return globals.map(g => {
-    const o = overrides.find(x => x.productGlobalId.toString() === shopId)
+    const o = overrides.find(x => x.productGlobalId.toString() === g._id.toString())
 
     return o ? {
       ...g.toObject(),
       name: o.name,
       price: o ? o.price : g.price !== null ? g.price : g.bv * 3600
-    } : g.toObject()
-  })
+    } : {
+      ...g.toObject(),
+      price: g.price !== null ? g.price : g.bv * 3600
+    }
+  }) as ProductType[]
 }
 
 export const updateGlobalProduct = async (id: string, data: UpdateGlobalProductDto): Promise<ProductType> => {

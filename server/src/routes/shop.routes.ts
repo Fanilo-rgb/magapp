@@ -1,12 +1,12 @@
 import { Router } from "express"
 import {createShop, getAllShop, getShopDetails} from "../controllers/shop.controller";
-import authorize from "../middleware/auth.middleware";
+import authorize, {protect} from "../middleware/auth.middleware";
 
 const shopRoutes = Router()
 
-shopRoutes.get("/", getAllShop)
+shopRoutes.get("/", authorize, protect(["admin"]), getAllShop)
 
-shopRoutes.get("/:id", authorize, getShopDetails)
+shopRoutes.get("/:id", authorize, protect(["shop_owner", "admin"]), getShopDetails)
 
 shopRoutes.post("/", authorize, createShop)
 

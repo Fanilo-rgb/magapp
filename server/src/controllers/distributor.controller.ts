@@ -6,205 +6,209 @@ import {validateRequiredFields} from "../utils/helper";
 import {addDistributor, getDistributorsBetweenDates} from "../services/distributor.service";
 import ShopModel, {ShopDocument} from "../models/shop.model";
 
-export const createDistributor = catchErrors(
-  async (req, res) => {
-    const distributor: DistributorType = req.body
+export const verifyDistributor = catchErrors(async (req, res) => {
+  const {numberCard} = req.body
 
-    const shop: ShopDocument | null = await ShopModel.findById(req.shop?._id)
+  const distributor = await DistributorModel.findOne({ numberCard })
+    .select("-__v -shops")
 
-    if (!shop) throw createError("Shop not found", NOT_FOUND)
-
-    validateRequiredFields(distributor, ["numberCard", "name", "surname"])
-
-    const newDistributor = await addDistributor(distributor, shop._id)
-
-    return res.status(CREATED).send({
+  if (distributor) {
+    return res.status(OK).send({
       success: true,
-      message: "Distributor created successfully",
-      data: newDistributor
+      data: distributor
     })
-
   }
-)
 
-export const getDistributors = catchErrors(
-  async (req, res) => {
+  return res.status(NOT_FOUND).send({
+    success: false,
+    message: "Distributor not found"
+  })
+})
 
-    const { d } = req.query
+export const createDistributor = catchErrors(async (req, res) => {
+  const distributor: DistributorType = req.body
 
-    const shopId = req.shop?._id
-    if (!shopId) throw createError("Shop not found", NOT_FOUND)
+  const shop: ShopDocument | null = await ShopModel.findById(req.shop?._id)
 
-    if (d === "today") {
-      const startOfDay = new Date()
-      startOfDay.setHours(0, 0, 0, 0)
-      const endOfDay = new Date()
-      endOfDay.setHours(23, 59, 59, 999)
+  if (!shop) throw createError("Shop not found", NOT_FOUND)
 
-      const distributors = await getDistributorsBetweenDates(startOfDay, endOfDay, shopId)
+  validateRequiredFields(distributor, ["numberCard", "name", "surname"])
 
-      return res.status(OK).send({
-        success: true,
-        data: distributors
-      })
-    }
+  const newDistributor = await addDistributor(distributor, shop._id)
 
-    if (d === "thisMonth") {
-      const startOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1)
-      const endOfMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0, 23, 59, 59, 999)
+  return res.status(CREATED).send({
+    success: true,
+    message: "Distributor created successfully",
+    data: newDistributor
+  })
 
-      const distributors = await getDistributorsBetweenDates(startOfMonth, endOfMonth, shopId)
+})
 
-      return res.status(OK).send({
-        success: true,
-        data: distributors
-      })
-    }
+export const getDistributors = catchErrors(async (req, res) => {
+  const { d } = req.query
 
-    const distributors = await DistributorModel.find({ shops: shopId })
-      .sort({ createdAt: -1 })
-      .select("_id offlineId numberCard name surname")
+  const shopId = req.shop?._id
+  if (!shopId) throw createError("Shop not found", NOT_FOUND)
+
+  if (d === "today") {
+    const startOfDay = new Date()
+    startOfDay.setHours(0, 0, 0, 0)
+    const endOfDay = new Date()
+    endOfDay.setHours(23, 59, 59, 999)
+
+    const distributors = await getDistributorsBetweenDates(startOfDay, endOfDay, shopId)
 
     return res.status(OK).send({
       success: true,
       data: distributors
     })
   }
-)
 
-export const getDistributor = catchErrors(
-  async (req, res) => {
-    const { numberCard } = req.params
-    const existing = await DistributorModel.exists({ numberCard })
+  if (d === "thisMonth") {
+    const startOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1)
+    const endOfMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0, 23, 59, 59, 999)
 
-    if (!existing) throw createError("Distributor not found or doesn't exist", NOT_FOUND)
-
-    const distributor = await DistributorModel.findOne({ numberCard: numberCard })
-      .select("-__v")
-      .populate("upLine", "_id offlineId numberCard name surname")
-      .populate("sponsor", "_id offlineId numberCard name surname")
-      .populate("shops", "_id name")
+    const distributors = await getDistributorsBetweenDates(startOfMonth, endOfMonth, shopId)
 
     return res.status(OK).send({
       success: true,
-      data: distributor
+      data: distributors
     })
   }
-)
 
-export const updateDistributor = catchErrors(
-  async (req, res) => {
-    const {id} = req.params
-    const updates: DistributorType = req.body
-    const shopId = req.shop?._id
+  const distributors = await DistributorModel.find({ shops: shopId })
+    .sort({ createdAt: -1 })
+    .select("_id offlineId numberCard name surname")
 
-    if (!shopId) throw createError("Shop not found", NOT_FOUND)
+  return res.status(OK).send({
+    success: true,
+    data: distributors
+  })
+})
 
-    const distributor: DistributorDocument | null = await DistributorModel.findOne({
-      _id: id,
-      shops: shopId // Verify this shop has access to this distributor
-    })
+export const getDistributor = catchErrors(async (req, res) => {
+  const { numberCard } = req.params
+  const existing = await DistributorModel.exists({ numberCard })
 
-    if (!distributor) throw createError("Distributor not found or doesn't exist", NOT_FOUND)
+  if (!existing) throw createError("Distributor not found or doesn't exist", NOT_FOUND)
 
-    validateRequiredFields(updates, ["numberCard", "name", "surname"])
+  const distributor = await DistributorModel.findOne({ numberCard: numberCard })
+    .select("-__v")
+    .populate("upLine", "_id offlineId numberCard name surname")
+    .populate("sponsor", "_id offlineId numberCard name surname")
+    .populate("shops", "_id name")
 
-    const existing: DistributorDocument | null = await DistributorModel.findOne({ numberCard: updates.numberCard })
+  return res.status(OK).send({
+    success: true,
+    data: distributor
+  })
+})
 
-    if (existing && existing._id.toString() !== id) {
-      const info = existing.getMinimumInfo()
-      throw createError(`A distributor with this numberCard already exists: ${info}`, BAD_REQUEST)
-    }
+export const updateDistributor = catchErrors(async (req, res) => {
+  const {id} = req.params
+  const updates: DistributorType = req.body
+  const shopId = req.shop?._id
 
-    distributor.numberCard = updates.numberCard
-    distributor.name = updates.name
-    distributor.surname = updates.surname
-    distributor.nationality = updates.nationality
-    distributor.dateOfBirth = updates.dateOfBirth
-    distributor.gender = updates.gender
-    distributor.phone = updates.phone
-    distributor.cin = updates.cin
-    distributor.email = updates.email
-    distributor.address = updates.address
-    distributor.postalCode = updates.postalCode
-    distributor.upLine = updates.upLine
-    distributor.sponsor = updates.sponsor
-    await distributor.save()
+  if (!shopId) throw createError("Shop not found", NOT_FOUND)
 
-    return res.status(OK).send({
-      success: true,
-      message: "Distributor updated successfully",
-      data: distributor
-    })
+  const distributor: DistributorDocument | null = await DistributorModel.findOne({
+    _id: id,
+    shops: shopId // Verify this shop has access to this distributor
+  })
 
+  if (!distributor) throw createError("Distributor not found or doesn't exist", NOT_FOUND)
+
+  validateRequiredFields(updates, ["numberCard", "name", "surname"])
+
+  const existing: DistributorDocument | null = await DistributorModel.findOne({ numberCard: updates.numberCard })
+
+  if (existing && existing._id.toString() !== id) {
+    const info = existing.getMinimumInfo()
+    throw createError(`A distributor with this numberCard already exists: ${info}`, BAD_REQUEST)
   }
-)
 
-export const softDeleteDistributor = catchErrors(
-  async (req, res) => {
-    const {numberCard} = req.params
-    const shopId = req.shop?._id
+  distributor.numberCard = updates.numberCard
+  distributor.name = updates.name
+  distributor.surname = updates.surname
+  distributor.nationality = updates.nationality
+  distributor.dateOfBirth = updates.dateOfBirth
+  distributor.gender = updates.gender
+  distributor.phone = updates.phone
+  distributor.cin = updates.cin
+  distributor.email = updates.email
+  distributor.address = updates.address
+  distributor.postalCode = updates.postalCode
+  distributor.upLine = updates.upLine
+  distributor.sponsor = updates.sponsor
+  await distributor.save()
 
-    if (!shopId) throw createError("Shop not found", NOT_FOUND)
+  return res.status(OK).send({
+    success: true,
+    message: "Distributor updated successfully",
+    data: distributor
+  })
 
-    const distributor: DistributorDocument | null = await DistributorModel.findOne({
-      numberCard,
-      shops: shopId
-    })
+})
 
-    if (!distributor) throw createError("Distributor not found or doesn't exist", NOT_FOUND)
+export const softDeleteDistributor = catchErrors(async (req, res) => {
+  const {numberCard} = req.params
+  const shopId = req.shop?._id
 
-    await distributor.softDelete()
+  if (!shopId) throw createError("Shop not found", NOT_FOUND)
 
-    return res.status(OK).send({
-      success: true,
-      message: "Distributor moved to trash"
-    })
-  }
-)
+  const distributor: DistributorDocument | null = await DistributorModel.findOne({
+    numberCard,
+    shops: shopId
+  })
 
-export const restoreDistributor = catchErrors(
-  async (req, res) => {
-    const {numberCard} = req.params
-    const shopId = req.shop?._id
+  if (!distributor) throw createError("Distributor not found or doesn't exist", NOT_FOUND)
 
-    if (!shopId) throw createError("Shop not found", NOT_FOUND)
+  await distributor.softDelete()
 
-    const distributor: DistributorDocument | null = await DistributorModel.findOne({
-      numberCard,
-      shops: shopId
-    })
+  return res.status(OK).send({
+    success: true,
+    message: "Distributor moved to trash"
+  })
+})
 
-    if (!distributor) throw createError("Distributor not found or doesn't exist", NOT_FOUND)
+export const restoreDistributor = catchErrors(async (req, res) => {
+  const {numberCard} = req.params
+  const shopId = req.shop?._id
 
-    await distributor.restore()
+  if (!shopId) throw createError("Shop not found", NOT_FOUND)
 
-    return res.status(OK).send({
-      success: true,
-      message: "Distributor restored"
-    })
-  }
-)
+  const distributor: DistributorDocument | null = await DistributorModel.findOne({
+    numberCard,
+    shops: shopId
+  })
 
-export const deleteDistributor = catchErrors(
-  async (req, res) => {
-    const {id} = req.params
-    const shopId = req.shop?._id
+  if (!distributor) throw createError("Distributor not found or doesn't exist", NOT_FOUND)
 
-    if (!shopId) throw createError("Shop not found", NOT_FOUND)
+  await distributor.restore()
 
-    const distributor: DistributorDocument | null = await DistributorModel.findOne({
-      _id: id,
-      shops: shopId
-    })
+  return res.status(OK).send({
+    success: true,
+    message: "Distributor restored"
+  })
+})
 
-    if (!distributor) throw createError("Distributor not found or doesn't exist", NOT_FOUND)
+export const deleteDistributor = catchErrors(async (req, res) => {
+  const {id} = req.params
+  const shopId = req.shop?._id
 
-    await distributor.deleteOne()
+  if (!shopId) throw createError("Shop not found", NOT_FOUND)
 
-    return res.status(OK).send({
-      success: true,
-      message: "Distributor deleted "
-    })
-  }
-)
+  const distributor: DistributorDocument | null = await DistributorModel.findOne({
+    _id: id,
+    shops: shopId
+  })
+
+  if (!distributor) throw createError("Distributor not found or doesn't exist", NOT_FOUND)
+
+  await distributor.deleteOne()
+
+  return res.status(OK).send({
+    success: true,
+    message: "Distributor deleted "
+  })
+})

@@ -5,7 +5,6 @@ export interface DistributorDocument extends mongoose.Document {
   numberCard: string
   name: string
   surname: string
-  offlineId?: string
   nationality: string
   dateOfBirth?: Date
   gender?: "male" | "female"
@@ -47,7 +46,6 @@ const distributorSchema = new Schema<DistributorDocument>({
     uppercase: true
   },
   surname: { type: String, trim: true },
-  offlineId: { type: String, required: [true, "A offline id is required"] },
   nationality: {
     type: String,
     default: "malagasy"

@@ -1,6 +1,7 @@
 import {BAD_REQUEST, UNAUTHORIZED} from "../constants/http";
 import { createError } from "./function";
 
+
 export const validateShopOwnership = (req: any, shopId: string) => {
   if (!req.shop || req.shop._id.toString() !== shopId) {
     throw createError("Unauthorized: You don't own this shop", UNAUTHORIZED);
