@@ -6,14 +6,14 @@ import cors from 'cors';
 import {APP_ORIGIN, NODE_ENV, PORT} from "./constants/env"
 import connectToDatabase from "./config/db";
 
-import errorHandler from "./middleware/errorHandler";
+import errorHandler from "./shared/middleware/errorHandler";
 import {OK} from "./constants/http";
 
-import productRouter from "./routes/product.routes"
-import distributorRouter from "./routes/distributor.routes";
-import userRouter from "./routes/user.routes";
-import authRouter from "./routes/auth.routes";
-import shopRoutes from "./routes/shop.routes";
+import productRouter from "./features/products/product.routes"
+import distributorRouter from "./features/distributors/distributor.routes";
+import userRouter from "./features/users/user.routes";
+import authRouter from "./features/auth/auth.routes";
+import shopRoutes from "./features/shops/shop.routes";
 
 const app = express();
 
