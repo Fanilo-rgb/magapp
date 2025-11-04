@@ -6,7 +6,7 @@ import {validateRequiredFields} from "../../shared/utils/helper";
 import {addDistributor, getDistributorsBetweenDates} from "./distributor.service";
 import ShopModel, {ShopDocument} from "../shops/shop.model";
 
-export const verifyDistributor = catchErrors(async (req, res) => {
+export const verifyNumberCard = catchErrors(async (req, res) => {
   const {numberCard} = req.body
 
   const distributor = await DistributorModel.findOne({ numberCard })

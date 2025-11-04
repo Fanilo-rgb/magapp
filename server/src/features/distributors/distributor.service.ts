@@ -51,3 +51,17 @@ export const getDistributorsBetweenDates = async (startDate: Date, endDate: Date
 
   return distributors
 }
+
+export const verifyDistributor = async (numberCard?: string, _id?: string) => {
+  if (numberCard) {
+    const distributor: DistributorDocument | null = await DistributorModel.findOne({ numberCard })
+
+    return distributor
+  }
+
+  if (_id) {
+    const distributor: DistributorDocument | null = await DistributorModel.findById(_id)
+
+    return distributor
+  }
+}
