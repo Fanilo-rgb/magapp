@@ -2,14 +2,13 @@ import mongoose, {model, Schema} from "mongoose";
 
 export interface ClientDocument extends mongoose.Document {
   _id: string
-  offlineId: string
   name: string,
-  gender: "male" | "female"
-  dateOfBirth: Date
-  height: number
-  weight: number
-  distributor: mongoose.Types.ObjectId
-  phone: string
+  gender?: "male" | "female"
+  dateOfBirth?: Date
+  height?: number
+  weight?: number
+  distributor?: mongoose.Types.ObjectId | null
+  phone?: string
   email?: string | null
   createdAt?: Date
   updatedAt?: Date
@@ -19,7 +18,6 @@ export interface ClientDocument extends mongoose.Document {
 }
 
 const clientSchema = new Schema<ClientDocument>({
-  offlineId: { type: String, required: [true, "A offline id is required"] },
   name: {
     type: String,
     required: [true, "A name is required"],
@@ -35,19 +33,19 @@ const clientSchema = new Schema<ClientDocument>({
   },
   dateOfBirth: {
     type: Date,
-    required: [true, "A date of birth is required"],
+    default: null
   },
   height: {
     type: Number,
-    required: [true, "A height is required"],
     min: [30, "The height must be at least 30"],
     max: [300, "The height must be at most 200"],
+    default: null
   },
   weight: {
     type: Number,
-    required: [true, "A weight is required"],
     min: [10, "The weight must be at least 10"],
     max: [200, "The weight must be at most 200"],
+    default: null
   },
   phone: {
     type: String,

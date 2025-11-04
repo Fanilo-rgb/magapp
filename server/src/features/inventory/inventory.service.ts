@@ -6,6 +6,8 @@ import {InventoryDocument, InventoryType, InventoryUpdateType, StockEntryAggrega
 import StockEntryModel from "./models/stockEntry.model";
 import mongoose from "mongoose";
 
+type updateInventoryType = (shopId: string | undefined, updates: InventoryUpdateType[], session: mongoose.mongo.ClientSession, type?: "entry" | "update") => Promise<void>
+
 export const getShopInventory = async (shopId: string | undefined) => {
   if (!shopId) throw createError("Shop not found", NOT_FOUND)
 
@@ -29,7 +31,7 @@ export const getShopInventory = async (shopId: string | undefined) => {
   })
 }
 
-export const updateShopInventory = async (shopId: string | undefined, updates: InventoryUpdateType[], session: mongoose.mongo.ClientSession) => {
+export const updateShopInventory: updateInventoryType = async (shopId, updates, session, type = "entry" ) => {
 
   const shopInventory = await getShopInventory(shopId)
 
@@ -45,7 +47,7 @@ export const updateShopInventory = async (shopId: string | undefined, updates: I
   for (const update of updates) {
     const i: InventoryDocument | null = await InventoryModel.findOne({ product: update._id.toString() })
 
-    if (update.quantity <= 0) continue
+    if (update.quantity === 0) continue
 
     if (i) {
       await i.updateQuantity(update.quantity, session)
@@ -59,13 +61,16 @@ export const updateShopInventory = async (shopId: string | undefined, updates: I
       await newInventory.save({ session })
     }
 
-    const newEntry = new StockEntryModel({
-      product: update._id,
-      quantity: update.quantity,
-      shop: shopId
-    })
+    if (type === "entry") {
+      const newEntry = new StockEntryModel({
+        product: update._id,
+        quantity: update.quantity,
+        shop: shopId
+      })
 
-    await newEntry.save({ session })
+      await newEntry.save({ session })
+    }
+
   }
 
 }

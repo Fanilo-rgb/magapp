@@ -25,6 +25,7 @@ export const updateInventory = catchErrors(async (req, res, next) => {
 
   updates.forEach(update => {
     if (isNaN(update.quantity)) throw new Error("The quantity must be a number")
+    if (update.quantity <= 0) throw new Error("The quantity must be greater than 0")
   })
 
   const session = await mongoose.startSession()

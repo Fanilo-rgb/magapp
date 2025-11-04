@@ -1,23 +1,7 @@
 import mongoose, {model, Schema} from "mongoose";
+import {InvoiceDocument, PaymentDocument} from "./types";
 
-export interface Payment {
-  amount: number
-  type: "cash" | "mvola" | "airtelMoney" | "orangeMoney"
-  date: Date
-}
-
-export interface InvoiceDocument extends mongoose.Document {
-  count: number
-  holder: mongoose.Types.ObjectId
-  holderModel: "Client" | "Distributor"
-  offlineId: string
-  shop: mongoose.Types.ObjectId
-  payments: Payment[]
-  createdAt: Date
-  updatedAt: Date
-}
-
-const payementSchema = new Schema({
+const payementSchema = new Schema<PaymentDocument>({
   amount: {
     type: Number,
     required: [true, "The amount is required"],
@@ -33,7 +17,7 @@ const payementSchema = new Schema({
   },
   date: {
     type: Date,
-    default: Date.now,
+    required: [true, "The date is required"]
   }
 })
 
@@ -48,7 +32,6 @@ const invoiceSchema = new Schema<InvoiceDocument>({
       message: "{VALUE} is not a valid holder model",
     },
   },
-  offlineId: { type: String, required: [true, "A offline id is required"] },
   shop: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Shop",
@@ -58,6 +41,10 @@ const invoiceSchema = new Schema<InvoiceDocument>({
     type: [payementSchema],
     default: [],
   },
+  savedAt: {
+    type: Date,
+    required: [true, "The saved at is required"],
+  }
 }, { timestamps: true })
 
 const InvoiceModel = model<InvoiceDocument>("Invoice", invoiceSchema)
