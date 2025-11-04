@@ -11,7 +11,8 @@ const stockEntrySchema = new mongoose.Schema <StockEntryDocument> ({
   product: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Product",
-    required: [ true, "The Product is required" ]
+    required: [ true, "The Product is required" ],
+    index: true
   },
   quantity: {
     type: Number,
@@ -22,6 +23,7 @@ const stockEntrySchema = new mongoose.Schema <StockEntryDocument> ({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Shop",
     required: [true, "A shop is required"],
+    index: true
   },
 }, { timestamps: true })
 

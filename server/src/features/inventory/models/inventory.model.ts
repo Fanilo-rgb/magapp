@@ -1,16 +1,12 @@
 import mongoose, {model, Schema} from "mongoose";
-
-export interface InventoryDocument extends mongoose.Document {
-  product: mongoose.Types.ObjectId,
-  quantity: number,
-  shop: mongoose.Types.ObjectId
-}
+import {InventoryDocument} from "../inventory.type";
 
 const inventorySchema = new Schema<InventoryDocument>({
   product: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Product",
-    required: [true, "The product is required"]
+    required: [true, "The product is required"],
+    index: true
   },
   quantity: {
     type: Number,
@@ -23,6 +19,11 @@ const inventorySchema = new Schema<InventoryDocument>({
     required: true
   }
 })
+
+inventorySchema.methods.updateQuantity = async function (quantity: number, session: mongoose.mongo.ClientSession) {
+  this.quantity += quantity
+  await this.save({ session })
+}
 
 const InventoryModel = model<InventoryDocument>("Inventory", inventorySchema)
 

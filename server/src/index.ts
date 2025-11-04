@@ -13,7 +13,8 @@ import productRouter from "./features/products/product.routes"
 import distributorRouter from "./features/distributors/distributor.routes";
 import userRouter from "./features/users/user.routes";
 import authRouter from "./features/auth/auth.routes";
-import shopRoutes from "./features/shops/shop.routes";
+import shopRouter from "./features/shops/shopRouter";
+import inventoryRouter from "./features/inventory/inventory.routes";
 
 const app = express();
 
@@ -25,9 +26,10 @@ app.use(
   })
 )
 
+app.use("/api/v1/inventory", inventoryRouter)
 app.use("/api/v1/auth", authRouter)
 app.use("/api/v1/users", userRouter)
-app.use("/api/v1/shops", shopRoutes)
+app.use("/api/v1/shops", shopRouter)
 
 app.use("/api/v1/products", productRouter)
 app.use("/api/v1/distributors", distributorRouter)
