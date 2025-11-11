@@ -22,3 +22,9 @@ export const create_shop = async (shopName: string, userId: string) => {
     shop: newShop
   }
 }
+
+export const getUserShops = async (userId: string) => {
+  const shops: ShopDocument[] = await ShopModel.find({ owner: userId })
+    .select("-__v -owner")
+  return shops
+}

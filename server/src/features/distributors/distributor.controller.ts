@@ -96,7 +96,7 @@ export const getDistributor = catchErrors(async (req, res) => {
     .select("-__v")
     .populate("upLine", "_id offlineId numberCard name surname")
     .populate("sponsor", "_id offlineId numberCard name surname")
-    .populate("shops", "_id name")
+    .select("-shops isDeleted -deletedAt")
 
   return res.status(OK).send({
     success: true,

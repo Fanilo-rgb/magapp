@@ -1,12 +1,14 @@
 import { Router } from "express"
-import {getUser, getUsers} from "./user.controller";
-import authorize from "../../shared/middleware/auth.middleware";
+import {getUser, getUserInfo, getUsers} from "./user.controller";
+import authorize, {protect} from "../../shared/middleware/auth.middleware";
 
 const userRouter = Router()
 
-userRouter.get("/", getUsers)
+userRouter.get("/me", authorize, getUserInfo)
 
-userRouter.get("/:id", authorize, getUser)
+userRouter.get("/", authorize, protect(["admin"]), getUsers)
+
+userRouter.get("/:id", authorize, protect(["admin"]), getUser)
 
 userRouter.post("/", (req, res) => res.send({ title: "CREATE new user" }))
 
