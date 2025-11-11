@@ -2,7 +2,7 @@ import catchErrors from "../../shared/utils/catchErrors";
 import DistributorModel, {DistributorDocument, DistributorType} from "./distributor.model";
 import {BAD_REQUEST, CREATED, NOT_FOUND, OK} from "../../constants/http";
 import {createError} from "../../shared/utils/function";
-import {validateRequiredFields} from "../../shared/utils/helper";
+import {validateRequiredFields, verifyShopId} from "../../shared/utils/helper";
 import {addDistributor, getDistributorsBetweenDates} from "./distributor.service";
 import ShopModel, {ShopDocument} from "../shops/shop.model";
 
@@ -107,9 +107,7 @@ export const getDistributor = catchErrors(async (req, res) => {
 export const updateDistributor = catchErrors(async (req, res) => {
   const {id} = req.params
   const updates: DistributorType = req.body
-  const shopId = req.shop?._id
-
-  if (!shopId) throw createError("Shop not found", NOT_FOUND)
+  const shopId = verifyShopId(req.shop?._id)
 
   const distributor: DistributorDocument | null = await DistributorModel.findOne({
     _id: id,
@@ -130,16 +128,15 @@ export const updateDistributor = catchErrors(async (req, res) => {
   distributor.numberCard = updates.numberCard
   distributor.name = updates.name
   distributor.surname = updates.surname
-  distributor.nationality = updates.nationality
-  distributor.dateOfBirth = updates.dateOfBirth
-  distributor.gender = updates.gender
-  distributor.phone = updates.phone
-  distributor.cin = updates.cin
-  distributor.email = updates.email
-  distributor.address = updates.address
-  distributor.postalCode = updates.postalCode
-  distributor.upLine = updates.upLine
-  distributor.sponsor = updates.sponsor
+  if (updates.cin) distributor.cin = updates.cin
+  if (updates.phone) distributor.phone = updates.phone
+  if (updates.email) distributor.email = updates.email
+  if (updates.dateOfBirth) distributor.dateOfBirth = new Date(updates.dateOfBirth)
+  if (updates.gender) distributor.gender = updates.gender
+  if (updates.address) distributor.address = updates.address
+  if (updates.postalCode) distributor.postalCode = updates.postalCode
+  if (updates.upLine) distributor.upLine = updates.upLine
+  if (updates.sponsor) distributor.sponsor = updates.sponsor
   await distributor.save()
 
   return res.status(OK).send({

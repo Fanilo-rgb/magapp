@@ -1,4 +1,4 @@
-import {BAD_REQUEST, UNAUTHORIZED} from "../../constants/http";
+import {BAD_REQUEST, NOT_FOUND, UNAUTHORIZED} from "../../constants/http";
 import { createError } from "./function";
 
 
@@ -14,3 +14,8 @@ export const validateRequiredFields = (data: any, fields: string[]) => {
     throw createError(`Missing required fields: ${missingFields.join(', ')}`, BAD_REQUEST);
   }
 };
+
+export const verifyShopId = (id: string | undefined) => {
+  if (!id) throw createError("Shop not found", NOT_FOUND)
+  return id
+}

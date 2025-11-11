@@ -15,7 +15,7 @@ distributorRouter.get("/:numberCard", authorize, protect(["shop_owner"]), getDis
 distributorRouter.post("/verify", verifyNumberCard)
 distributorRouter.post("/", authorize, protect(["shop_owner"]), createDistributor )
 
-distributorRouter.put("/:id", updateDistributor)
+distributorRouter.put("/:id",authorize, protect(["shop_owner"]),updateDistributor)
 distributorRouter.put("/:numberCard/delete", softDeleteDistributor)
 distributorRouter.put("/:numberCard/restore", restoreDistributor)
 

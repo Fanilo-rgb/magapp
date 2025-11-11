@@ -6,10 +6,9 @@ import {InventoryDocument, InventoryType, InventoryUpdateType, StockEntryAggrega
 import StockEntryModel from "./models/stockEntry.model";
 import mongoose from "mongoose";
 
-type updateInventoryType = (shopId: string | undefined, updates: InventoryUpdateType[], session: mongoose.mongo.ClientSession, type?: "entry" | "update") => Promise<void>
+type updateInventoryType = (shopId: string, updates: InventoryUpdateType[], session: mongoose.mongo.ClientSession, type?: "entry" | "update") => Promise<void>
 
-export const getShopInventory = async (shopId: string | undefined) => {
-  if (!shopId) throw createError("Shop not found", NOT_FOUND)
+export const getShopInventory = async (shopId: string) => {
 
   const shopProducts = await getProductsForShop(shopId)
 
@@ -75,8 +74,7 @@ export const updateShopInventory: updateInventoryType = async (shopId, updates, 
 
 }
 
-export const getShopStockEntry = async (shopId: string | undefined, date: Date) => {
-  if (!shopId) throw createError("Shop not found", NOT_FOUND)
+export const getShopStockEntry = async (shopId: string, date: Date) => {
 
   const shopProducts = await getProductsForShop(shopId)
 

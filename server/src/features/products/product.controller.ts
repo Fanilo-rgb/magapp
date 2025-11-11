@@ -9,7 +9,7 @@ import {
   getProductsForShop,
   updateGlobalProduct
 } from "./product.service";
-import {validateRequiredFields, validateShopOwnership} from "../../shared/utils/helper";
+import {validateRequiredFields, validateShopOwnership, verifyShopId} from "../../shared/utils/helper";
 
 export const rebaseProduct = catchErrors(async (req, res) => {
   const result = await rebaseGlobalProducts()
@@ -86,9 +86,7 @@ export const createProduct = catchErrors(async (req, res) => {
 
 export const getShopProducts = catchErrors(async (req, res) => {
 
-  const shopId = req.shop?._id
-
-  if (!shopId) throw createError("Shop not found", NOT_FOUND)
+  const shopId = verifyShopId(req.shop?._id)
 
   const products = await getProductsForShop(shopId)
 

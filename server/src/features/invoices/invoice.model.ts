@@ -5,7 +5,7 @@ const payementSchema = new Schema<PaymentDocument>({
   amount: {
     type: Number,
     required: [true, "The amount is required"],
-    min: [200, "The amount must be at least 200 ar"]
+    min: [0, "The amount must be positive"]
   },
   type: {
     type: String,
@@ -36,6 +36,7 @@ const invoiceSchema = new Schema<InvoiceDocument>({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Shop",
     required: [true, "A shop is required"],
+    index: true
   },
   payments: {
     type: [payementSchema],

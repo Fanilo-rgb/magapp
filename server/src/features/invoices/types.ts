@@ -14,6 +14,7 @@ export interface PaymentDocument extends mongoose.Document {
 }
 
 export interface InvoiceDocument extends mongoose.Document {
+  _id: string
   count: number
   holder: mongoose.Types.ObjectId
   holderModel: "Client" | "Distributor"
@@ -27,7 +28,7 @@ export interface InvoiceDocument extends mongoose.Document {
 export type holderType = {
   _id?: mongoose.Types.ObjectId,
   numberCard?: string,
-  fullname: string
+  name: string
   type: "Client" | "Distributor"
 }
 

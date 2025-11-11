@@ -15,17 +15,21 @@ import userRouter from "./features/users/user.routes";
 import authRouter from "./features/auth/auth.routes";
 import shopRouter from "./features/shops/shopRouter";
 import inventoryRouter from "./features/inventory/inventory.routes";
+import invoiceRouter from "./features/invoices/invoice.routes";
+import saleRouter from "./features/sales/sale.routes";
 
-const app = express();
+const app = express()
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use(
   cors({
     origin: APP_ORIGIN
   })
 )
 
+app.use("/api/v1/sales", saleRouter)
+app.use("/api/v1/invoices", invoiceRouter)
 app.use("/api/v1/inventory", inventoryRouter)
 app.use("/api/v1/auth", authRouter)
 app.use("/api/v1/users", userRouter)

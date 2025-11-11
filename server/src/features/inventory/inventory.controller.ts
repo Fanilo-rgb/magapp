@@ -5,9 +5,10 @@ import {InventoryUpdateType} from "./inventory.type";
 import mongoose from "mongoose";
 import {createError} from "../../shared/utils/function";
 import {formatDateFr} from "../../shared/utils/dateUtils";
+import {verifyShopId} from "../../shared/utils/helper";
 
 export const getInventory = catchErrors(async (req, res) => {
-  const shopId = req.shop?._id
+  const shopId = verifyShopId(req.shop?._id)
 
   const inventory = await getShopInventory(shopId)
 
@@ -21,7 +22,7 @@ export const getInventory = catchErrors(async (req, res) => {
 
 export const updateInventory = catchErrors(async (req, res, next) => {
   const updates: InventoryUpdateType[] = req.body
-  const shopId = req.shop?._id
+  const shopId = verifyShopId(req.shop?._id)
 
   updates.forEach(update => {
     if (isNaN(update.quantity)) throw new Error("The quantity must be a number")
@@ -52,7 +53,7 @@ export const updateInventory = catchErrors(async (req, res, next) => {
 })
 
 export const getStockEntry = catchErrors(async (req, res) => {
-  const shopId = req.shop?._id
+  const shopId = verifyShopId(req.shop?._id)
   const { date } = req.body
 
   if (!date || isNaN(new Date(date).getTime())) throw createError("The date must be a valid date", BAD_REQUEST)

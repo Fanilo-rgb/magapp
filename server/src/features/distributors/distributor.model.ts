@@ -36,8 +36,8 @@ const distributorSchema = new Schema<DistributorDocument>({
     unique: true,
     required: [true, 'Number card is required'],
     index: true,
-    minlength: [7, "Must be at least 7 characters."],
-    maxlength: [8, "Must be under 8 characters."]
+    minlength: [7, "The number card must be at least 7 characters."],
+    maxlength: [8, "The number card must be under 8 characters."]
   },
   name: {
     type: String,

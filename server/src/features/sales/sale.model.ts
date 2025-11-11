@@ -6,6 +6,7 @@ export interface SaleDocument extends mongoose.Document {
   quantity: number
   payed: boolean
   delivered: boolean
+  createdAt: Date
 }
 
 const saleSchema = new mongoose.Schema <SaleDocument> ({
@@ -32,7 +33,7 @@ const saleSchema = new mongoose.Schema <SaleDocument> ({
     type: Boolean,
     default: true
   }
-})
+}, { timestamps: true })
 
 const SaleModel = mongoose.model <SaleDocument> ("Sale", saleSchema)
 
