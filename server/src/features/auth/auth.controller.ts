@@ -72,4 +72,9 @@ export const signIn = catchErrors(
   }
 )
 
-export const signOut = () => {}
+export const signOut = catchErrors(async (req, res) => {
+  return res.status(OK).send({
+    success: true,
+    message: "User signed out successfully"
+  })
+})

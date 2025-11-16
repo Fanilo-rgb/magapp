@@ -1,7 +1,7 @@
 import DistributorModel, {DistributorDocument, DistributorType} from "./distributor.model";
 import mongoose from "mongoose";
 
-type addDistributorType = (distributor: DistributorType, shopId: string) => Promise<DistributorDocument>
+type addDistributorType = (distributor: Partial<DistributorType> , shopId: string) => Promise<DistributorDocument>
 
 export const addDistributor: addDistributorType = async (distributor, shopId) => {
 
