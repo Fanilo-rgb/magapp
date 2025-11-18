@@ -42,7 +42,7 @@ const ApplicationItem = ({data}: Props) => {
     >
       <div
         onClick={handleClick}
-        className="h-8 sm:h-10 flex justify-between items-center cursor-pointer border shadow shadow-transparent hover:shadow-black/20 border-gray-300 p-1 sm:p-2 rounded-xl transition gap-2"
+        className="bg-white h-8 sm:h-10 flex justify-between items-center cursor-pointer border shadow shadow-transparent hover:shadow-black/20 border-gray-300 p-1 sm:p-2 rounded-xl transition gap-2"
       >
         <div className="flex gap-2 pl-1">
           <span className="w-20 text-center">{numberCard}</span>

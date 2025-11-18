@@ -19,7 +19,7 @@ const WidgetContainer = ({children, buttonLink,title, icon: Icon, header: Elemen
   }
 
   return (
-    <div className="widget">
+    <div className="widget bg-white py-2 px-4 rounded-xl">
       <div className={`flex items-center justify-between ${Element ? "h-8 pb-2" : "mb-2"}`}>
         <div className="text-gray-500 text-xs flex gap-2 px-2">
           <Icon size={14}/>

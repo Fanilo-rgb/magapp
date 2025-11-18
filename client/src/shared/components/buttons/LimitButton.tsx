@@ -10,7 +10,7 @@ type Props = React.ComponentProps<"button"> & {
 const LimitButton = ({ variant = "close", ...props }: Props) => {
   const [isHover, setIsHover] = useState(false)
 
-  const containerBaseStyle = "absolute grid place-items-center w-full h-14 bg-gradient-to-b from-transparent to-white"
+  const containerBaseStyle = "absolute left-0 grid place-items-center w-full h-14 bg-gradient-to-b from-transparent to-white rounded-xl"
 
   const containerVariants: Record<string, string> = {
     open: "bottom-2",

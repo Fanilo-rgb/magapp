@@ -4,6 +4,7 @@ import type {LucideIcon} from "lucide-react";
 type variant = "primary" | "secondary" | "red" | "basic"
 
 type Props = React.ComponentProps<"button"> & {
+  className?: string
   children?: React.ReactNode
   variant?: variant
   icon?: LucideIcon
@@ -12,7 +13,7 @@ type Props = React.ComponentProps<"button"> & {
   width?: "full" | "fit"
 }
 
-const Button = ({ children, icon: Icon, text = "base", width = "fit",iconPosition = "left", variant = "basic", ...props }: Props) => {
+const Button = ({ className, children, icon: Icon, text = "base", width = "fit",iconPosition = "left", variant = "basic", ...props }: Props) => {
 
   const textSize: string = text === "base" ? "" : "text-xs"
 
@@ -28,7 +29,7 @@ const Button = ({ children, icon: Icon, text = "base", width = "fit",iconPositio
   }
 
   return (
-    <button className={`${baseStyle} ${textSize} ${variants[variant]} ${widthStyle}`} {...props}>
+    <button className={`${baseStyle} ${textSize} ${variants[variant]} ${widthStyle} ${className}`} {...props}>
       {Icon && iconPosition === "left" && <Icon size={16} />}
       {children}
       {Icon && iconPosition === "right" && <Icon className="ml-auto" size={16} />}

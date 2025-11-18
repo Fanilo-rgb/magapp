@@ -38,7 +38,7 @@ const SaleItem = ({data}: Props) => {
     >
       <div
         onClick={handleClick}
-        className="h-8 sm:h-10 flex justify-between items-center cursor-pointer border shadow shadow-transparent hover:shadow-black/20 border-gray-300 p-1 sm:p-2 rounded-xl transition gap-2"
+        className="h-8 sm:h-10 flex justify-between items-center cursor-pointer border shadow shadow-transparent hover:shadow-black/20 border-gray-300 p-1 sm:p-2 rounded-xl transition gap-2 bg-white"
       >
         {data.isCustomer && <span className="h-2 rounded-full ml-2 sm:ml-1 w-2 bg-cyan-400"/>}
         <span className="truncate flex-1 pl-1">{data.name}</span>

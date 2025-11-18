@@ -27,7 +27,7 @@ const PatientCard = ({data}: Props) => {
   return (
     <div
       onClick={handleClick}
-      className="p-2 cursor-pointer h-full border border-gray-300 min-w-36 rounded-2xl overflow-hidden shadow-md shadow-transparent hover:shadow-black/10 transition"
+      className="bg-white p-2 cursor-pointer h-full border border-gray-300 min-w-36 rounded-2xl overflow-hidden shadow-md shadow-transparent hover:shadow-black/10 transition"
     >
       <div className={`relative h-8 rounded-lg w-full border-2 ${data.checkup === "appointment" ? "bg-cyan-200 border-emerald-400" : "bg-fuchsia-200 border-fuchsia-400"}`}>
 
