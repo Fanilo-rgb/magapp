@@ -1,18 +1,27 @@
 import Button from "../../shared/components/buttons/Button.tsx";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Eye, EyeClosed} from "lucide-react";
 import {useState} from "react";
+import useAuthentication from "./hooks/useAuthentication.tsx";
 
 const SignInPage = () => {
-  const navigate = useNavigate()
+
+  const { signIn, loading, error } = useAuthentication()
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const [errorMessage, setErrorMessage] = useState("")
+
   const [show, setShow] = useState(false)
 
   const handleShow = () => {
     setShow(!show)
   }
 
-  const handleSignIn = () => {
-    navigate("/")
+  const handleSignIn = async () => {
+    await signIn({ email, password })
+    setErrorMessage(error)
   }
 
   return (
@@ -26,6 +35,8 @@ const SignInPage = () => {
             <label htmlFor="email" className="pb-2 text-xs text-gray-600 pl-2">Email</label>
             <input
               id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="bg-white rounded-xl outline-2 outline-transparent focus:outline-cyan-300 transition p-2"
               type="email"
               placeholder="exemple@gmail.com"
@@ -36,6 +47,8 @@ const SignInPage = () => {
             <div className="relative flex flex-col">
               <input
                 id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="bg-white rounded-xl outline-2 outline-transparent focus:outline-cyan-300 transition p-2"
                 type={ show ? "text" : "password" }
                 placeholder="Votre mot de passe"
@@ -47,7 +60,21 @@ const SignInPage = () => {
                 onClick={handleShow}
               />
             </div>
+
           </div>
+
+          {loading && (
+            <div>
+              Chargement ...
+            </div>
+          )}
+
+          {(errorMessage && !loading) && (
+            <div className="bg-red-100 p-1 rounded-lg border-2 border-red-300 text-bold text-red-600">
+              {errorMessage}
+            </div>
+          )}
+
           <Button
             className="py-2 bg-slate-700 hover:bg-slate-800 rounded-2xl"
             variant="secondary"

@@ -13,3 +13,5 @@ export type ContainerType = {
   onClose: () => void
   children: React.ReactNode
 }
+
+export type userRoleType = "admin" | "shop_owner" | "user"
