@@ -1,5 +1,4 @@
 import SaleItem from "../widget/SaleItem.tsx";
-import Button from "../../../shared/components/buttons/Button.tsx";
 
 const sales = [
   {
@@ -77,12 +76,6 @@ const sales = [
 const SalesList = () => {
   return (
     <div className="flex flex-col">
-      <div className="p-2">
-        <h2>Achats</h2>
-        <div>
-          <Button/>
-        </div>
-      </div>
       <div className="flex flex-col gap-2">
         {sales.map(sale => (
           <SaleItem data={sale}/>

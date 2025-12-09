@@ -2,15 +2,31 @@ import ChoicesList from "../../../shared/components/inputs/ChoicesList.tsx";
 import type {Label} from "../../../shared/types/types.ts";
 import Button from "../../../shared/components/buttons/Button.tsx";
 import {Pen} from "lucide-react";
+import {useSearchParams} from "react-router-dom";
+import useProduct from "../hooks/useProduct.tsx";
 
 const ProductView = () => {
 
-  const productType: Label[] = [{ value: "tea", placeholder: "Thé", color: "green" }]
+  const [params] = useSearchParams()
+  const productId = params.get("id")
+  const { products, getLabel } = useProduct()
+
+  const product = products.find(product => product._id === productId)
+
+  if (!product) return <div>Product not found</div>
+
+  const { name, bv, order, type, price: rawPrice } = product
+
+  const price = rawPrice.toLocaleString()
+
+  const detailsPrice = (rawPrice * 1.2).toLocaleString()
+
+  const productType: Label[] = getLabel(type)
 
   return (
     <div className="relative flex flex-col gap-4">
       <div className="flex justify-between items-center">
-        <span className="font-semibold">#1</span>
+        <span className="font-semibold">#{order}</span>
         <Button icon={Pen} text="sm">
           Modifier
         </Button>
@@ -18,7 +34,7 @@ const ProductView = () => {
 
       <div>
         <p className="w-full text-lg font-semibold py-1">
-          Kuding Plus Tea
+          {name}
         </p>
       </div>
 
@@ -30,7 +46,7 @@ const ProductView = () => {
             type="text"
             className="w-full py-1 px-2 border border-gray-300 rounded-md outline-0"
             placeholder="Nom du produit"
-            value="Kuding tea"
+            value={name}
             readOnly
           />
         </div>
@@ -41,7 +57,7 @@ const ProductView = () => {
             type="text"
             className="w-full py-1 px-2 border border-gray-300 rounded-md outline-0"
             placeholder="Nom du produit"
-            value="12"
+            value={bv}
             readOnly
           />
         </div>
@@ -52,7 +68,7 @@ const ProductView = () => {
             type="text"
             className="w-full py-1 px-2 border border-gray-300 rounded-md outline-0"
             placeholder="Nom du produit"
-            value="43 200"
+            value={price}
             readOnly
           />
         </div>
@@ -63,7 +79,7 @@ const ProductView = () => {
             type="text"
             className="w-full py-1 px-2 border border-gray-300 rounded-md outline-0"
             placeholder="Nom du produit"
-            value="51 300"
+            value={detailsPrice}
             readOnly
           />
         </div>

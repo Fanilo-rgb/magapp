@@ -17,6 +17,7 @@ import shopRouter from "./features/shops/shopRouter";
 import inventoryRouter from "./features/inventory/inventory.routes";
 import invoiceRouter from "./features/invoices/invoice.routes";
 import saleRouter from "./features/sales/sale.routes";
+import axios from "axios";
 
 const app = express()
 
@@ -44,6 +45,14 @@ app.get("/", (req, res, next) => {
     message: "healthy"
   })
 })
+
+app.post("/test-n8n", async (req, res) => {
+  const response = await axios.post("http://localhost:5678/webhook-test/test-webhook", {
+    user: "fanilo",
+    action: "test"
+  });
+  res.send("Webhook called !");
+});
 
 app.use(errorHandler)
 

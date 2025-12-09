@@ -1,25 +1,27 @@
 import ProductList from "./components/ProductList.tsx";
-import Button from "../../shared/components/buttons/Button.tsx";
 import {useNavigate} from "react-router-dom";
+import PageWrapper from "../../shared/components/forPages/PageWrapper.tsx";
+import {useEffect} from "react";
+import useProduct from "./hooks/useProduct.tsx";
 
 const ProductPage = () => {
 
+  const { products, fetchProducts } = useProduct()
   const navigate = useNavigate()
 
+  useEffect(() => {
+    fetchProducts()
+  }, []);
+
   return (
-    <div className="h-full px-2 sm:p-10 pt-2 flex gap-2">
+    <PageWrapper
+      title="Produit"
+      action={{ placeholder: "Ajouter un produit", onClick: () => navigate("?type=drawer&content=addProduct") }}
+    >
       <div className="flex flex-col flex-1 gap-2">
-        <div>
-          <Button
-            onClick={() => navigate("?type=drawer&content=addProduct")}
-            variant="secondary"
-          >
-            Ajouter un Produit
-          </Button>
-        </div>
-        <ProductList/>
+        <ProductList products={products}/>
       </div>
-    </div>
+    </PageWrapper>
   )
 }
 export default ProductPage

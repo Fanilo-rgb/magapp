@@ -1,40 +1,12 @@
 import ProductItem from "./ProductItem.tsx";
 import {useNavigate} from "react-router-dom";
+import type {Product} from "../type.ts";
 
-const products = [
-  {
-    order: 1,
-    name: "Kuding",
-    price: 43200,
-    bv: 12
-  },
-  {
-    order: 2,
-    name: "Cordyceps",
-    price: 86400,
-    bv: 24
-  },
-  {
-    order: 3,
-    name: "Ginseng",
-    price: 129600,
-    bv: 36
-  },
-  {
-    order: 4,
-    name: "Reishi",
-    price: 172800,
-    bv: 48
-  },
-  {
-    order: 5,
-    name: "Schisandra",
-    price: 216000,
-    bv: 60
-  }
-]
+type ProductListProps = {
+  products: Product[]
+}
 
-const ProductList = () => {
+const ProductList = ({ products }: ProductListProps) => {
 
   const navigate = useNavigate()
 
@@ -68,12 +40,6 @@ const ProductList = () => {
             Bv
           </button>
         </div>
-        <span className="verticalDivider" />
-        <div className="w-20">
-          <button className="p-1 rounded-lg w-full">
-            En stock
-          </button>
-        </div>
       </div>
       <div className="flex flex-col flex-1 mt-2 overflow-auto gap-2 divide-y divide-gray-300">
         {products.map(product => (
@@ -84,7 +50,6 @@ const ProductList = () => {
             name={product.name}
             price={product.price}
             bv={product.bv}
-            qt={10}
           />
         ))}
       </div>

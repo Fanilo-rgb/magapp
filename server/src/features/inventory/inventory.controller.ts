@@ -10,6 +10,7 @@ import {verifyShopId} from "../../shared/utils/helper";
 export const getInventory = catchErrors(async (req, res) => {
   const shopId = verifyShopId(req.shop?._id)
 
+  // this is the products list with the quantity in the inventory
   const inventory = await getShopInventory(shopId)
 
   return res.status(OK).send({

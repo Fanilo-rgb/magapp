@@ -1,23 +1,31 @@
 import ChoicesList from "../../../shared/components/inputs/ChoicesList.tsx";
 import type {Label} from "../../../shared/types/types.ts";
 import Button from "../../../shared/components/buttons/Button.tsx";
+import useProduct from "../hooks/useProduct.tsx";
+import {useState} from "react";
 
 const ProductForm = () => {
-  const productChoices: Label[] = [
-    { value: "tea", placeholder: "Thé", color: "green" },
-    { value: "capsule", placeholder: "Gélule", color: "blue" },
-    { value: "powder", placeholder: "Poudre", color: "yellow" },
-    { value: "plaster", placeholder: "Plâtre", color: "purple" },
-    { value: "compressed", placeholder: "Comprimé", color: "red" },
-    { value: "pill", placeholder: "Pilule", color: "pink" },
-    { value: "candy", placeholder: "Bonbons", color: "orange" }
-  ]
+
+  const [type, setType] = useState("tea")
+  const [name, setName] = useState("")
+  const [bv, setBv] = useState("")
+  const [price, setPrice] = useState<string | null>(null)
+
+  const { getLabel, addProduct } = useProduct()
+  const productChoices = getLabel()
 
   const consumptionChoices: Label[] = [
     { value: "before", placeholder: "Avant", color: "gray" },
     { value: "during", placeholder: "Pendant", color: "gray" },
     { value: "after", placeholder: "Après", color: "gray" }
   ]
+
+  const handleSave = () => {
+    const numberBv = Number(bv)
+    const numberPrice = Number(price)
+
+    addProduct(name, numberBv, type, numberPrice)
+  }
 
   return (
     <div className="relative flex flex-col gap-4">
@@ -27,6 +35,8 @@ const ProductForm = () => {
           spellCheck={false}
           className="outline-0 w-full text-lg font-semibold py-1 hover:placeholder:tracking-wider placeholder:font-light placeholder:text-gray-400"
           placeholder="Nom du produit *"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
 
@@ -37,7 +47,7 @@ const ProductForm = () => {
           <input
             type="text"
             className="w-full py-1 px-2 border border-gray-300 rounded-md outline-2 outline-transparent focus:outline-cyan-400 transition"
-            placeholder="Nom du produit"
+            placeholder="Pseudo du produit"
             spellCheck={false}
           />
         </div>
@@ -48,6 +58,16 @@ const ProductForm = () => {
             type="text"
             className="w-full py-1 px-2 border border-gray-300 rounded-md outline-2 outline-transparent focus:outline-cyan-400 transition"
             placeholder="Bv *"
+            value={bv}
+            onChange={(e) => {
+              const value = e.target.value
+
+              if (isNaN(Number(value))) return
+
+              const newPrice = String(Number(value) * 3600)
+              setPrice(newPrice)
+              setBv(value)
+            }}
           />
         </div>
 
@@ -57,6 +77,8 @@ const ProductForm = () => {
             type="text"
             className="w-full py-1 px-2 border border-gray-300 rounded-md outline-2 outline-transparent focus:outline-cyan-400 transition"
             placeholder="Prix details"
+            onChange={(e) => setPrice(e.target.value)}
+            value={price ? Number(price).toLocaleString() : ""}
           />
         </div>
       </div>
@@ -64,7 +86,12 @@ const ProductForm = () => {
       <hr/>
 
       <div className="flex flex-col gap-2">
-        <ChoicesList choices={productChoices} label="Type du produit"/>
+        <ChoicesList
+          choices={productChoices}
+          label="Type du produit"
+          value={type}
+          onChange={(value) => setType(value)}
+        />
 
         <div className="flex items-center">
           <div className="w-44 p-1 text-gray-500">
@@ -78,7 +105,6 @@ const ProductForm = () => {
             />
           </div>
         </div>
-
       </div>
 
       <hr/>
@@ -159,7 +185,7 @@ const ProductForm = () => {
       </div>
 
       <div className="flex w-full">
-        <Button variant={"secondary"} width={"full"}>
+        <Button variant={"secondary"} width={"full"} onClick={handleSave}>
           Enregistrer
         </Button>
       </div>

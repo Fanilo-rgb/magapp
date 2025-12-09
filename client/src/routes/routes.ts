@@ -34,7 +34,10 @@ const router = createBrowserRouter([
     loader: requireAuth,
     children: [
       { index: true, Component: MainPage },
-      { path: "products", Component: ProductPage },
+      {
+        path: "products",
+        Component: ProductPage
+      },
       { path: "sales", Component: SalesPage },
     ]
   },

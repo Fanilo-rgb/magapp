@@ -24,7 +24,7 @@ const Button = ({ className, children, icon: Icon, text = "base", width = "fit",
   const variants: Record<string, string> = {
     basic: "text-gray-600 bg-transparent hover:bg-black/10 hover:text-gray-700",
     primary: "bg-gray-200 hover:bg-gray-300 text-gray-500 hover:text-gray-700",
-    secondary: "bg-emerald-500 text-white hover:bg-emerald-600",
+    secondary: "bg-slate-700 text-white hover:bg-slate-800",
     red: "bg-red-50 text-red-500 hover:text-red-600 hover:bg-red-200"
   }
 
